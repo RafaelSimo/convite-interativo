@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Convite de Casamento | Alleane &amp; Rafael</title>
+    <meta name="description" content="Um convite de casamento interativo inesquecível, elegante e personalizado.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Libraries for PDF Generation and QR Code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- App Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="state-scene1">
+
+    <!-- Ambient Audio Controls -->
+    <button id="audio-toggle" class="audio-control-btn" aria-label="Alternar Som" title="Música de Fundo">
+        <svg id="sound-on-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/></svg>
+        <svg id="sound-off-icon" class="hidden" viewBox="0 0 24 24"><path fill="currentColor" d="M12,4L7,9H3V15H7L12,20V4M16.5,12A4.5,4.5 0 0,0 14,7.97V10.18L16.45,12.63C16.48,12.42 16.5,12.21 16.5,12M19,12C19,12.94 18.8,13.84 18.45,14.67L19.96,16.18C20.62,14.91 21,13.5 21,12A9,9 0 0,0 14,3.23V5.29C16.89,6.15 19,8.83 19,12M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.44 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L4.27,3Z"/></svg>
+    </button>
+
+    <!-- Canvas Particle Background Layer (Gold Dust & Candle Embers) -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Main Viewport 3D Table Scene -->
+    <div id="scene-viewport" class="scene-viewport">
+        
+        <!-- Table Surface Container -->
+        <div id="wood-table" class="wood-table">
+            
+            <!-- Candle Ambient Lights -->
+            <div class="candle-glow candle-left"></div>
+            <div class="candle-glow candle-right"></div>
+
+            <!-- Central Content Layout Container -->
+            <div id="experience-container" class="experience-container">
+                
+                <!-- 1. Luxury Royal Emerald Green Envelope with Gold Satin Ribbon & Damask Pattern -->
+                <div id="envelope" class="envelope royal-envelope">
+                    <!-- Royal Damask Pattern Overlay -->
+                    <div class="envelope-damask-pattern"></div>
+                    <div class="envelope-gold-frame"></div>
+
+                    <!-- Filigree Gold Corner Flourishes -->
+                    <svg class="gold-corner corner-tl" viewBox="0 0 50 50">
+                        <path d="M0,0 L50,0 L50,6 Q20,6 6,20 L6,50 L0,50 Z M12,12 Q20,12 25,25 Q12,20 12,12 Z" fill="url(#crestGold)"/>
+                    </svg>
+                    <svg class="gold-corner corner-tr" viewBox="0 0 50 50">
+                        <path d="M50,0 L0,0 L0,6 Q30,6 44,20 L44,50 L50,50 Z M38,12 Q30,12 25,25 Q38,20 38,12 Z" fill="url(#crestGold)"/>
+                    </svg>
+                    <svg class="gold-corner corner-bl" viewBox="0 0 50 50">
+                        <path d="M0,50 L50,50 L50,44 Q20,44 6,30 L6,0 L0,0 Z M12,38 Q20,38 25,25 Q12,30 12,38 Z" fill="url(#crestGold)"/>
+                    </svg>
+                    <svg class="gold-corner corner-br" viewBox="0 0 50 50">
+                        <path d="M50,50 L0,50 L0,44 Q30,44 44,30 L44,0 L50,0 Z M38,38 Q30,38 25,25 Q38,30 38,38 Z" fill="url(#crestGold)"/>
+                    </svg>
+
+                    <!-- Vertical Royal Gold Satin Ribbon Wrap (Passing Behind Wax Seal) -->
+                    <div id="gold-ribbon" class="gold-ribbon-band vertical">
+                        <div class="ribbon-gold-line left"></div>
+                        <div class="ribbon-gold-line right"></div>
+                    </div>
+
+                    <!-- Envelope Back Interior -->
+                    <div class="envelope-back">
+                        <div class="envelope-pattern"></div>
+                    </div>
+                    
+                    <!-- Envelope Flaps -->
+                    <div class="envelope-flap flap-left"></div>
+                    <div class="envelope-flap flap-right"></div>
+                    <div class="envelope-flap flap-bottom"></div>
+                    <div id="top-flap" class="envelope-flap flap-top">
+                        <div class="flap-gold-edge"></div>
+                    </div>
+
+                    <!-- Handcrafted 3D Royal Wax Seal with Melted Drips & Official AR Monogram -->
+                    <div id="wax-seal" class="wax-seal" title="Toque para abrir o convite">
+                        <div class="seal-glow"></div>
+                        <div class="seal-body organic-wax-shape">
+                            <div class="wax-drip drip-1"></div>
+                            <div class="wax-drip drip-2"></div>
+                            <div class="wax-outer-rim"></div>
+                            <div class="wax-inner-well">
+                                <img src="logo.png" class="official-seal-logo" alt="Logo Monograma Noivos">
+                            </div>
+                            <div class="seal-crack-lines"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Sliding Parchment Letter -->
+                <div id="letter-slide" class="letter-slide hidden-letter">
+                    <div id="letter" class="letter">
+                        <div class="letter-border">
+                            
+                            <!-- Header with Official Logo Image & CONVITE DE CASAMENTO -->
+                            <div class="letter-header">
+                                <img src="logo.png" class="official-header-logo" alt="Monograma Noivos">
+                                <div class="header-subtitle">CONVITE DE CASAMENTO</div>
+                            </div>
+
+                            <!-- Letter Body Content -->
+                            <div class="letter-body-content">
+                                <p class="intro-quote">"Com o amor, o tempo desacelera e a eternidade começa."</p>
+                                <h1 class="bride-groom-names">Alleane &amp; Rafael</h1>
+
+                                <div class="invitation-text-container">
+                                    <p class="invitation-lead">Com a bênção de seus pais,</p>
+                                    <p class="invitation-body">
+                                        Convidam você para celebrar a união de suas vidas e testemunhar a promessa de um futuro repleto de amor, cumplicidade e alegria.
+                                    </p>
+                                    <div class="event-details-grid">
+                                        <div class="detail-item">
+                                            <span class="detail-label">DATA</span>
+                                            <span class="detail-val">21 DE NOVEMBRO DE 2026</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <span class="detail-label">HORÁRIO</span>
+                                            <span class="detail-val">17:00 HORAS</span>
+                                        </div>
+                                        <div class="detail-item full-width">
+                                            <span class="detail-label">LOCAL</span>
+                                            <span class="detail-val">IGREJA N.S. DE FÁTIMA</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="signature-area">
+                                    <div class="signature-line">
+                                        <span class="signature-text" id="signature-handwriting">Alleane &amp; Rafael</span>
+                                        <!-- SVG Golden Feather Quill -->
+                                        <svg id="golden-feather" class="golden-feather hidden" viewBox="0 0 100 100">
+                                            <path d="M10,90 Q30,40 85,10 Q65,45 50,60 Q35,75 10,90 Z" fill="#d4af37" />
+                                            <path d="M10,90 Q45,50 85,10" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.7"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Menus Container (Positioned BELOW the Letter) -->
+                <div id="menus-container" class="menus-container hidden-menus">
+                    <!-- Senhas Card -->
+                    <div id="scroll-left" class="scroll-card">
+                        <div class="scroll-card-header">🔑 SEUS CONVITES</div>
+                        <div class="pass-box">
+                            <span class="pass-tag">CONVIDADO 01</span>
+                            <strong class="pass-code">SENHA 1</strong>
+                        </div>
+                        <div class="pass-box">
+                            <span class="pass-tag">CONVIDADO 02</span>
+                            <strong class="pass-code">SENHA 2</strong>
+                        </div>
+                    </div>
+
+                    <!-- Menu Card (Lista de Presentes & Mensagem) -->
+                    <div id="scroll-right" class="scroll-card">
+                        <div class="scroll-card-header">MENU DE OPÇÕES</div>
+                        <button id="btn-gifts" class="scroll-action-btn">
+                            <span class="btn-icon">🎁</span>
+                            <span class="btn-text">Lista de Presentes</span>
+                        </button>
+                        <button id="btn-story" class="scroll-action-btn">
+                            <span class="btn-icon">✉️</span>
+                            <span class="btn-text">Mensagem dos Noivos</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Floating Bottom Toolbar (Save PDF & Add to Calendar) -->
+        <div id="action-toolbar" class="action-toolbar hidden-toolbar">
+            <button id="btn-download-pdf" class="toolbar-btn primary">
+                <svg class="btn-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/></svg>
+                <span>Salvar Convite em PDF</span>
+            </button>
+            
+            <button id="btn-add-calendar" class="toolbar-btn secondary">
+                <svg class="btn-svg" viewBox="0 0 24 24"><path fill="currentColor" d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/></svg>
+                <span>Adicionar ao Calendário</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- MODAL: LISTA DE PRESENTES -->
+    <div id="modal-gifts" class="modal-overlay hidden" role="dialog" aria-hidden="true">
+        <div class="modal-card">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <span class="modal-icon">🎁</span>
+                <h2>Lista de Presentes</h2>
+                <p>Sua presença é o nosso maior presente! Se desejar nos presentear, acesse nossa lista no site dos noivos:</p>
+            </div>
+            <div class="modal-body">
+                <div class="gift-site-card">
+                    <h3>Lista Virtual de Presentes</h3>
+                    <p>Preparamos uma lista virtual no nosso site com várias opções especiais para você escolher com praticidade.</p>
+                    <a href="https://alleaneerafael.com.br/presentes" target="_blank" rel="noopener noreferrer" id="btn-open-gift-site" class="gift-site-btn">
+                        <span class="btn-icon">🎁</span>
+                        <span>Acessar Lista no Site dos Noivos</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: MENSAGEM DOS NOIVOS -->
+    <div id="modal-story" class="modal-overlay hidden" role="dialog" aria-hidden="true">
+        <div class="modal-card story-card">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <span class="modal-icon">✉️</span>
+                <h2>Mensagem dos Noivos</h2>
+                <p>Informações importantes e agradecimentos de Alleane &amp; Rafael</p>
+            </div>
+            <div class="modal-body">
+                <div class="message-sections">
+                    <div class="message-box">
+                        <h3>❤️ Com Carinho &amp; Agradecimento</h3>
+                        <p>Queridos familiares e amigos, a presença de vocês é o nosso maior presente! Estamos preparando cada detalhe com muito amor para celebrarmos juntos esse dia inesquecível.</p>
+                    </div>
+                    <div class="message-box">
+                        <h3>👗 Trajes &amp; Vestimentas</h3>
+                        <p>O estilo do nosso casamento é <strong>Passeio Completo / Esporte Fino</strong>. As cores dos trajes e vestidos são de <strong>livre escolha</strong> de cada convidado! Sintam-se à vontade para vestir a cor que fizer você se sentir mais bem e elegante.</p>
+                    </div>
+                    <div class="message-box">
+                        <h3>⏰ Horário &amp; Pontualidade</h3>
+                        <p>A cerimônia terá início impreterivelmente às <strong>17:00h</strong> na <strong>Igreja N.S. de Fátima</strong>. Recomendamos a chegada com 15 a 20 minutos de antecedência para se acomodarem com tranquilidade.</p>
+                    </div>
+                    <div class="message-box">
+                        <h3>🔑 Entrada no Evento</h3>
+                        <p>Por favor, apresentem suas senhas individuais de acesso (SENHA 1 / SENHA 2) na recepção do evento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                        <div class="timeline-date">2019</div>
+                        <div class="timeline-content">
+                            <h3>O Primeiro Olhar</h3>
+                            <p>Nos conhecemos durante um café num final de tarde ensolarado. Uma conversa de 10 minutos se transformou em horas inesquecíveis.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2021</div>
+                        <div class="timeline-content">
+                            <h3>O Primeiro "Sim"</h3>
+                            <p>Iniciamos nossa jornada juntos, descobrindo o prazer de compartilhar sonhos, viagens, risadas e pequenos momentos do dia a dia.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Template for PDF Rendering -->
+    <div id="pdf-printable-template" class="pdf-template">
+        <div class="pdf-container">
+            <div class="pdf-border-gold">
+                <div class="pdf-header">
+                    <img src="logo.png" style="width:70px; margin-bottom:8px;" alt="Logo Noivos">
+                    <div class="pdf-subtitle">CONVITE DE CASAMENTO</div>
+                </div>
+                
+                <h1 class="pdf-couple">Alleane &amp; Rafael</h1>
+                <p class="pdf-quote">"Com o amor, o tempo desacelera e a eternidade começa."</p>
+
+                <div class="pdf-divider-gold"></div>
+
+                <p class="pdf-body-text">
+                    Com a bênção de seus pais, convidam você para celebrar a união de suas vidas e testemunhar a promessa de um futuro repleto de amor e felicidade.
+                </p>
+
+                <div class="pdf-details-box">
+                    <div class="pdf-detail"><label>DATA:</label> <span>21 de Novembro de 2026</span></div>
+                    <div class="pdf-detail"><label>HORÁRIO:</label> <span>17:00 Horas</span></div>
+                    <div class="pdf-detail"><label>LOCAL:</label> <span>Igreja N.S. de Fátima</span></div>
+                </div>
+
+                <div class="pdf-passwords-box">
+                    <h3>SUAS SENHAS DE ACESSO</h3>
+                    <p><strong>SENHA 1</strong> &nbsp;|&nbsp; <strong>SENHA 2</strong></p>
+                </div>
+
+                <div class="pdf-footer-grid">
+                    <div class="pdf-qr-section">
+                        <div id="pdf-qrcode" class="pdf-qrcode"></div>
+                        <span>Acesse o Convite Interativo</span>
+                    </div>
+                    <div class="pdf-info-section">
+                        <p>&bull; Lista de Presentes & Nossa História no site</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
