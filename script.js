@@ -307,9 +307,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --------------------------------------------------------------------------
-       6. ADD TO CALENDAR (.ICS GENERATION - MOBILE FRIENDLY)
+       6. ADD TO CALENDAR (GOOGLE CALENDAR + ICAL FILE FOR 100% COMPATIBILITY)
        -------------------------------------------------------------------------- */
-    const handleCalendarDownload = () => {
+    const handleCalendarDownload = (e) => {
+        if (e && e.stopPropagation) {
+            e.stopPropagation();
+        }
+
+        // 1. Trigger Google Calendar Web Link (Opens Google Calendar app / web)
+        const gCalUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE"
+            + "&text=" + encodeURIComponent("Casamento Alleane & Rafael")
+            + "&dates=20261121T170000Z/20261121T230000Z"
+            + "&details=" + encodeURIComponent("Celebração do Casamento de Alleane e Rafael na Igreja N.S. de Fátima.")
+            + "&location=" + encodeURIComponent("Igreja N.S. de Fátima");
+            
+        window.open(gCalUrl, '_blank');
+
+        // 2. Also generate & download .ics file for Apple iCal / Outlook
         const icsData = [
             "BEGIN:VCALENDAR",
             "VERSION:2.0",
@@ -333,24 +347,19 @@ document.addEventListener('DOMContentLoaded', () => {
         link.setAttribute('download', 'Casamento_Alleane_e_Rafael.ics');
         document.body.appendChild(link);
         link.click();
-        setTimeout(() => document.body.removeChild(link), 200);
+        setTimeout(() => document.body.removeChild(link), 300);
     };
 
     if (btnAddCalendar) {
-        let calendarTriggered = false;
         ['click', 'touchend'].forEach(evt => {
             btnAddCalendar.addEventListener(evt, (e) => {
-                e.preventDefault();
-                if (calendarTriggered) return;
-                calendarTriggered = true;
-                handleCalendarDownload();
-                setTimeout(() => { calendarTriggered = false; }, 1000);
-            }, { passive: false });
+                handleCalendarDownload(e);
+            }, { passive: true });
         });
     }
 
     /* --------------------------------------------------------------------------
-       7. BULLETPROOF PDF GENERATION (JSPDF + HTML2CANVAS + FALLBACK)
+       7. BULLETPROOF PDF GENERATION (JSPDF + HTML2CANVAS + PRINT FALLBACK)
        -------------------------------------------------------------------------- */
     
     // Generate QR Code dynamically for PDF
@@ -367,84 +376,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const handlePdfDownload = async () => {
+    const handlePdfDownload = async (e) => {
+        if (e && e.stopPropagation) {
+            e.stopPropagation();
+        }
         const pdfTemplate = document.getElementById('pdf-printable-template');
         if (!pdfTemplate) return;
         
-        btnDownloadPdf.disabled = true;
-        const btnSpan = btnDownloadPdf.querySelector('span');
+        const targetBtn = btnDownloadPdf || document.getElementById('btn-download-pdf');
+        const btnSpan = targetBtn ? targetBtn.querySelector('span') : null;
         const origText = btnSpan ? btnSpan.innerText : "Salvar Convite em PDF";
+        
         if (btnSpan) btnSpan.innerText = "Gerando PDF...";
+        if (targetBtn) targetBtn.disabled = true;
 
         // Temporarily bring template into viewable DOM position for html2canvas
         const originalStyle = pdfTemplate.getAttribute('style') || '';
         pdfTemplate.style.cssText = 'position: fixed; top: 0; left: 0; width: 700px; z-index: 999999; opacity: 1; visibility: visible; background: #f9f5eb; pointer-events: none;';
 
         try {
-            if (typeof html2canvas === 'undefined') {
-                throw new Error("html2canvas not loaded");
-            }
+            if (typeof html2canvas === 'function') {
+                const canvasRender = await html2canvas(pdfTemplate, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#f9f5eb',
+                    logging: false
+                });
 
-            const canvasRender = await html2canvas(pdfTemplate, {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#f9f5eb',
-                logging: false
-            });
+                pdfTemplate.style.cssText = originalStyle;
 
-            // Restore template original hidden style
-            pdfTemplate.style.cssText = originalStyle;
+                const imgData = canvasRender.toDataURL('image/jpeg', 0.95);
+                let jsPDFClass = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
 
-            const imgData = canvasRender.toDataURL('image/jpeg', 0.95);
-            
-            // Get jsPDF constructor flexibly
-            let jsPDFClass = null;
-            if (window.jspdf && window.jspdf.jsPDF) {
-                jsPDFClass = window.jspdf.jsPDF;
-            } else if (window.jsPDF) {
-                jsPDFClass = window.jsPDF;
-            }
-
-            if (jsPDFClass) {
-                const pdf = new jsPDFClass('p', 'mm', 'a4');
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (canvasRender.height * pdfWidth) / canvasRender.width;
-
-                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save('Convite_Casamento_Alleane_e_Rafael.pdf');
+                if (jsPDFClass) {
+                    const pdf = new jsPDFClass('p', 'mm', 'a4');
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = (canvasRender.height * pdfWidth) / canvasRender.width;
+                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                    pdf.save('Convite_Casamento_Alleane_e_Rafael.pdf');
+                } else {
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = imgData;
+                    downloadLink.download = 'Convite_Casamento_Alleane_e_Rafael.jpg';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    setTimeout(() => document.body.removeChild(downloadLink), 300);
+                }
             } else {
-                // Fallback: Download image as JPG directly if jsPDF library is blocked
-                const downloadLink = document.createElement('a');
-                downloadLink.href = imgData;
-                downloadLink.download = 'Convite_Casamento_Alleane_e_Rafael.jpg';
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                setTimeout(() => document.body.removeChild(downloadLink), 200);
+                pdfTemplate.style.cssText = originalStyle;
+                window.print();
             }
-
         } catch (error) {
-            console.error("Erro ao gerar PDF:", error);
+            console.error("PDF generation error:", error);
             pdfTemplate.style.cssText = originalStyle;
-
-            // Secondary Fallback: Direct Print Window
             window.print();
         } finally {
-            btnDownloadPdf.disabled = false;
+            if (targetBtn) targetBtn.disabled = false;
             if (btnSpan) btnSpan.innerText = origText;
         }
     };
 
     if (btnDownloadPdf) {
-        let pdfTriggered = false;
         ['click', 'touchend'].forEach(evt => {
             btnDownloadPdf.addEventListener(evt, (e) => {
-                e.preventDefault();
-                if (pdfTriggered) return;
-                pdfTriggered = true;
-                handlePdfDownload();
-                setTimeout(() => { pdfTriggered = false; }, 2000);
-            }, { passive: false });
+                handlePdfDownload(e);
+            }, { passive: true });
         });
     }
 
