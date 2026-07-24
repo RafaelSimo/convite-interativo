@@ -164,15 +164,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scene 1: Initial camera zoom down onto dark table (Auto on load)
     body.className = 'state-scene1';
 
-    // Click Seal Trigger -> Step-By-Step Sequence
-    waxSeal.addEventListener('click', () => {
-        if (currentScene > 1) return; // Prevent double trigger
+    let sealOpened = false;
+
+    const openInvitationSequence = (e) => {
+        if (e && e.cancelable) {
+            e.preventDefault();
+        }
+        if (currentScene > 1) return;
         currentScene = 2;
+
+        // Play background music on seal tap
+        if (bgMusic && !isAudioPlaying) {
+            bgMusic.play().then(() => {
+                isAudioPlaying = true;
+                if (soundOnIcon) soundOnIcon.classList.remove('hidden');
+                if (soundOffIcon) soundOffIcon.classList.add('hidden');
+            }).catch(err => {
+                console.log("Music play catch:", err);
+            });
+        }
 
         // 1. Wax Shatter & Ribbon Drop
         body.className = 'state-scene2';
         waxSeal.classList.add('depressed');
-        playSoundEffect('wax-crack');
 
         setTimeout(() => {
             waxSeal.classList.add('cracked');
@@ -186,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
             currentScene = 3;
             body.className = 'state-scene3';
             envelope.classList.add('opened');
-            playSoundEffect('paper-slide');
 
             // Letter slides UP to top of screen first
             letterSlide.classList.add('center-display');
@@ -202,9 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 goldenFeather.classList.remove('hidden');
                 signatureText.classList.add('writing');
 
-                // 4. STEP C: Menus Reveal ONLY AFTER Signature Completes (at 5000ms)
+                // 4. STEP C: Menus Reveal ONLY AFTER Signature Completes
                 setTimeout(() => {
-                    playSoundEffect('feather-flourish');
                     goldenFeather.classList.add('stroke-end');
 
                     // Reveal Menu Papiros below the signed letter
@@ -224,15 +236,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentScene = 6;
                         body.className = 'state-scene6';
                         actionToolbar.classList.remove('hidden-toolbar');
-                    }, 1500);
+                    }, 1200);
 
                 }, 3600); // 3.6s writing duration for elegant signature
 
-            }, 1500); // Ensures sheet is 100% still and fixed at top of page before writing starts!
+            }, 1400); // Waits for letter slide to reach top
 
         }, 250);
+    };
 
-    });
+    // Attach both click and touchend to wax seal for 100% mobile compatibility
+    if (waxSeal) {
+        ['click', 'touchend'].forEach(evtType => {
+            waxSeal.addEventListener(evtType, (e) => {
+                if (sealOpened) return;
+                sealOpened = true;
+                openInvitationSequence(e);
+            }, { passive: false });
+        });
+    }
 
     /* --------------------------------------------------------------------------
        5. MODAL & INTERACTIVE CONTROLS
