@@ -116,25 +116,46 @@ document.addEventListener('DOMContentLoaded', () => {
     animateParticles();
 
     /* --------------------------------------------------------------------------
-       3. AUDIO ENGINE (SILENT BY DEFAULT / CLEAN TOGGLE)
+       3. BACKGROUND MUSIC & AUDIO ENGINE
        -------------------------------------------------------------------------- */
-    function playSoundEffect(type) {
-        // Audio effects disabled for clean, non-intrusive experience
-    }
+    const bgMusic = document.getElementById('bg-music');
 
     function toggleBackgroundMusic() {
+        if (!bgMusic) return;
         if (isAudioPlaying) {
+            bgMusic.pause();
             isAudioPlaying = false;
             soundOnIcon.classList.add('hidden');
             soundOffIcon.classList.remove('hidden');
         } else {
-            isAudioPlaying = true;
-            soundOnIcon.classList.remove('hidden');
-            soundOffIcon.classList.add('hidden');
+            bgMusic.play().then(() => {
+                isAudioPlaying = true;
+                soundOnIcon.classList.remove('hidden');
+                soundOffIcon.classList.add('hidden');
+            }).catch(err => {
+                console.log("Audio play error:", err);
+            });
         }
     }
 
-    audioBtn.addEventListener('click', toggleBackgroundMusic);
+    if (audioBtn) {
+        audioBtn.addEventListener('click', toggleBackgroundMusic);
+    }
+
+    // Auto-start ambient music on first user touch/click anywhere
+    const startAudioOnUserGesture = () => {
+        if (bgMusic && !isAudioPlaying) {
+            bgMusic.play().then(() => {
+                isAudioPlaying = true;
+                if (soundOnIcon) soundOnIcon.classList.remove('hidden');
+                if (soundOffIcon) soundOffIcon.classList.add('hidden');
+            }).catch(() => {});
+        }
+        document.removeEventListener('click', startAudioOnUserGesture);
+        document.removeEventListener('touchstart', startAudioOnUserGesture);
+    };
+    document.addEventListener('click', startAudioOnUserGesture, { once: true });
+    document.addEventListener('touchstart', startAudioOnUserGesture, { once: true });
 
     /* --------------------------------------------------------------------------
        4. SCENE SEQUENCER (CENAS 1 A 6)
@@ -398,5 +419,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }, { passive: false });
         });
     }
+
+    // Expose global window methods for maximum compatibility
+    window.downloadCalendar = handleCalendarDownload;
+    window.downloadPDF = handlePdfDownload;
 
 });
