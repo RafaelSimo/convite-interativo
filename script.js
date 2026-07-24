@@ -25,14 +25,17 @@ window.downloadCalendar = function(e) {
 "END:VCALENDAR";
 
     try {
-        const dataUri = "data:text/calendar;charset=utf-8," + encodeURIComponent(icsContent);
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const blobUrl = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.href = dataUri;
+        link.href = blobUrl;
         link.setAttribute('download', 'Casamento_Alleane_e_Rafael.ics');
+        link.style.display = 'none';
         document.body.appendChild(link);
         link.click();
         setTimeout(function() {
             if (link.parentNode) link.parentNode.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
         }, 500);
     } catch(err) {
         console.error("Calendar download error:", err);
@@ -76,6 +79,7 @@ window.downloadPDF = function(e) {
                 const a = document.createElement('a');
                 a.href = imgData;
                 a.download = 'Convite_Casamento_Alleane_e_Rafael.jpg';
+                a.style.display = 'none';
                 document.body.appendChild(a);
                 a.click();
                 setTimeout(function(){ if (a.parentNode) a.parentNode.removeChild(a); }, 500);
@@ -84,11 +88,9 @@ window.downloadPDF = function(e) {
         }).catch(function(err) {
             console.error("Canvas error:", err);
             pdfTemplate.style.cssText = origStyle;
-            window.print();
             if (btnSpan) btnSpan.innerText = origText;
         });
     } else {
-        window.print();
         if (btnSpan) btnSpan.innerText = origText;
     }
 };
