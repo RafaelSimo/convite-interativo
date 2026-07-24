@@ -829,7 +829,7 @@ body.state-scene6 .envelope {
     bottom: calc(16px + env(safe-area-inset-bottom));
     left: 50%;
     transform: translateX(-50%);
-    z-index: 999999;
+    z-index: 9999999;
     display: flex;
     gap: 12px;
     width: 94vw;
@@ -840,17 +840,9 @@ body.state-scene6 .envelope {
     border-radius: 30px;
     backdrop-filter: blur(12px);
     box-shadow: var(--shadow-deep), var(--shadow-gold);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.action-toolbar:not(.hidden-toolbar) {
+    opacity: 1;
     pointer-events: auto !important;
-}
-
-.action-toolbar.hidden-toolbar {
-    opacity: 0;
-    transform: translateX(-50%) translateY(50px);
-    pointer-events: none !important;
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .toolbar-btn {

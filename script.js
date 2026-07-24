@@ -309,21 +309,22 @@ document.addEventListener('DOMContentLoaded', () => {
     /* --------------------------------------------------------------------------
        6. ADD TO CALENDAR (GOOGLE CALENDAR + ICAL FILE FOR 100% COMPATIBILITY)
        -------------------------------------------------------------------------- */
-    const handleCalendarDownload = (e) => {
-        if (e && e.stopPropagation) {
-            e.stopPropagation();
-        }
+    window.downloadCalendar = function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (e && e.stopPropagation) e.stopPropagation();
 
-        // 1. Trigger Google Calendar Web Link (Opens Google Calendar app / web)
+        // 1. Google Calendar Link
         const gCalUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE"
             + "&text=" + encodeURIComponent("Casamento Alleane & Rafael")
             + "&dates=20261121T170000Z/20261121T230000Z"
             + "&details=" + encodeURIComponent("Celebração do Casamento de Alleane e Rafael na Igreja N.S. de Fátima.")
             + "&location=" + encodeURIComponent("Igreja N.S. de Fátima");
             
-        window.open(gCalUrl, '_blank');
+        try {
+            window.open(gCalUrl, '_blank');
+        } catch(err) {}
 
-        // 2. Also generate & download .ics file for Apple iCal / Outlook
+        // 2. Download .ics for iCal / Outlook
         const icsData = [
             "BEGIN:VCALENDAR",
             "VERSION:2.0",
@@ -341,20 +342,20 @@ document.addEventListener('DOMContentLoaded', () => {
             "END:VCALENDAR"
         ].join("\r\n");
 
-        const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.setAttribute('download', 'Casamento_Alleane_e_Rafael.ics');
-        document.body.appendChild(link);
-        link.click();
-        setTimeout(() => document.body.removeChild(link), 300);
+        try {
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Casamento_Alleane_e_Rafael.ics');
+            document.body.appendChild(link);
+            link.click();
+            setTimeout(() => document.body.removeChild(link), 300);
+        } catch(err) {}
     };
 
     if (btnAddCalendar) {
         ['click', 'touchend'].forEach(evt => {
-            btnAddCalendar.addEventListener(evt, (e) => {
-                handleCalendarDownload(e);
-            }, { passive: true });
+            btnAddCalendar.addEventListener(evt, window.downloadCalendar, { passive: true });
         });
     }
 
@@ -376,21 +377,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const handlePdfDownload = async (e) => {
-        if (e && e.stopPropagation) {
-            e.stopPropagation();
-        }
+    window.downloadPDF = async function(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (e && e.stopPropagation) e.stopPropagation();
+
         const pdfTemplate = document.getElementById('pdf-printable-template');
-        if (!pdfTemplate) return;
-        
-        const targetBtn = btnDownloadPdf || document.getElementById('btn-download-pdf');
+        const targetBtn = document.getElementById('btn-download-pdf');
         const btnSpan = targetBtn ? targetBtn.querySelector('span') : null;
         const origText = btnSpan ? btnSpan.innerText : "Salvar Convite em PDF";
         
         if (btnSpan) btnSpan.innerText = "Gerando PDF...";
         if (targetBtn) targetBtn.disabled = true;
 
-        // Temporarily bring template into viewable DOM position for html2canvas
+        if (!pdfTemplate) {
+            window.print();
+            if (targetBtn) targetBtn.disabled = false;
+            if (btnSpan) btnSpan.innerText = origText;
+            return;
+        }
+
         const originalStyle = pdfTemplate.getAttribute('style') || '';
         pdfTemplate.style.cssText = 'position: fixed; top: 0; left: 0; width: 700px; z-index: 999999; opacity: 1; visibility: visible; background: #f9f5eb; pointer-events: none;';
 
@@ -405,9 +410,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 pdfTemplate.style.cssText = originalStyle;
-
                 const imgData = canvasRender.toDataURL('image/jpeg', 0.95);
-                let jsPDFClass = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+                const jsPDFClass = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
 
                 if (jsPDFClass) {
                     const pdf = new jsPDFClass('p', 'mm', 'a4');
@@ -439,14 +443,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnDownloadPdf) {
         ['click', 'touchend'].forEach(evt => {
-            btnDownloadPdf.addEventListener(evt, (e) => {
-                handlePdfDownload(e);
-            }, { passive: true });
+            btnDownloadPdf.addEventListener(evt, window.downloadPDF, { passive: true });
         });
     }
-
-    // Expose global window methods for maximum compatibility
-    window.downloadCalendar = handleCalendarDownload;
-    window.downloadPDF = handlePdfDownload;
 
 });
