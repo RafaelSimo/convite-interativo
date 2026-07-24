@@ -14,13 +14,23 @@ window.downloadCalendar = function(e) {
 "PRODID:-//Alleane & Rafael//Casamento//PT-BR\r\n" +
 "BEGIN:VEVENT\r\n" +
 "UID:casamento-alleane-rafael-2026-" + Date.now() + "@wedding.com\r\n" +
-"DTSTAMP:20260723T000000Z\r\n" +
-"DTSTART:20261121T170000Z\r\n" +
-"DTEND:20261121T230000Z\r\n" +
+"DTSTAMP:20260724T000000Z\r\n" +
+"DTSTART:20261121T190000\r\n" +
+"DTEND:20261121T235900\r\n" +
 "SUMMARY:Casamento Alleane & Rafael\r\n" +
-"DESCRIPTION:Celebração do Casamento de Alleane e Rafael na Igreja N.S. de Fátima.\r\n" +
+"DESCRIPTION:Celebração do Casamento de Alleane e Rafael na Igreja N.S. de Fátima às 19:00h.\r\n" +
 "LOCATION:Igreja N.S. de Fátima\r\n" +
 "STATUS:CONFIRMED\r\n" +
+"BEGIN:VALARM\r\n" +
+"TRIGGER:-P1D\r\n" +
+"ACTION:DISPLAY\r\n" +
+"DESCRIPTION:Lembrete: amanhã é o Casamento de Alleane & Rafael às 19:00h!\r\n" +
+"END:VALARM\r\n" +
+"BEGIN:VALARM\r\n" +
+"TRIGGER:-PT1H\r\n" +
+"ACTION:DISPLAY\r\n" +
+"DESCRIPTION:Lembrete: o Casamento de Alleane & Rafael começa em 1 hora (19:00h)!\r\n" +
+"END:VALARM\r\n" +
 "END:VEVENT\r\n" +
 "END:VCALENDAR";
 
