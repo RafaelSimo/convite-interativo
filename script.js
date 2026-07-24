@@ -116,9 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
     animateParticles();
 
     /* --------------------------------------------------------------------------
-       3. BACKGROUND MUSIC & AUDIO ENGINE
+       3. BACKGROUND MUSIC & AUDIO ENGINE (SOFT AMBIENT VOLUME)
        -------------------------------------------------------------------------- */
     const bgMusic = document.getElementById('bg-music');
+
+    if (bgMusic) {
+        bgMusic.volume = 0.35; // Soft ambient volume level (35%)
+    }
 
     function toggleBackgroundMusic() {
         if (!bgMusic) return;
@@ -128,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             soundOnIcon.classList.add('hidden');
             soundOffIcon.classList.remove('hidden');
         } else {
+            bgMusic.volume = 0.35;
             bgMusic.play().then(() => {
                 isAudioPlaying = true;
                 soundOnIcon.classList.remove('hidden');
@@ -145,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Auto-start ambient music on first user touch/click anywhere
     const startAudioOnUserGesture = () => {
         if (bgMusic && !isAudioPlaying) {
+            bgMusic.volume = 0.35;
             bgMusic.play().then(() => {
                 isAudioPlaying = true;
                 if (soundOnIcon) soundOnIcon.classList.remove('hidden');
