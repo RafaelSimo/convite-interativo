@@ -841,8 +841,14 @@ body.state-scene6 .envelope {
     backdrop-filter: blur(12px);
     box-shadow: var(--shadow-deep), var(--shadow-gold);
     opacity: 1;
-    pointer-events: auto !important;
+    pointer-events: auto;
     transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.action-toolbar.hidden-toolbar {
+    opacity: 0;
+    transform: translateX(-50%) translateY(60px);
+    pointer-events: none !important;
 }
 
 .toolbar-btn {
