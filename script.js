@@ -3,6 +3,96 @@
  * Logic & Scene Sequencer Engine
  */
 
+// Global standalone download functions (Available immediately for inline onclick)
+window.downloadCalendar = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (e && e.stopPropagation) e.stopPropagation();
+
+    const icsContent = 
+"BEGIN:VCALENDAR\r\n" +
+"VERSION:2.0\r\n" +
+"PRODID:-//Alleane & Rafael//Casamento//PT-BR\r\n" +
+"BEGIN:VEVENT\r\n" +
+"UID:casamento-alleane-rafael-2026-" + Date.now() + "@wedding.com\r\n" +
+"DTSTAMP:20260723T000000Z\r\n" +
+"DTSTART:20261121T170000Z\r\n" +
+"DTEND:20261121T230000Z\r\n" +
+"SUMMARY:Casamento Alleane & Rafael\r\n" +
+"DESCRIPTION:Celebração do Casamento de Alleane e Rafael na Igreja N.S. de Fátima.\r\n" +
+"LOCATION:Igreja N.S. de Fátima\r\n" +
+"STATUS:CONFIRMED\r\n" +
+"END:VEVENT\r\n" +
+"END:VCALENDAR";
+
+    try {
+        const dataUri = "data:text/calendar;charset=utf-8," + encodeURIComponent(icsContent);
+        const link = document.createElement('a');
+        link.href = dataUri;
+        link.setAttribute('download', 'Casamento_Alleane_e_Rafael.ics');
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(function() {
+            if (link.parentNode) link.parentNode.removeChild(link);
+        }, 500);
+    } catch(err) {
+        console.error("Calendar download error:", err);
+    }
+};
+
+window.downloadPDF = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (e && e.stopPropagation) e.stopPropagation();
+
+    const targetBtn = document.getElementById('btn-download-pdf');
+    const btnSpan = targetBtn ? targetBtn.querySelector('span') : null;
+    const origText = btnSpan ? btnSpan.innerText : "Salvar Convite em PDF";
+
+    if (btnSpan) btnSpan.innerText = "Gerando PDF...";
+
+    const pdfTemplate = document.getElementById('pdf-printable-template');
+
+    if (typeof html2canvas === 'function' && pdfTemplate) {
+        const origStyle = pdfTemplate.getAttribute('style') || '';
+        pdfTemplate.style.cssText = 'position: fixed; top: 0; left: 0; width: 700px; z-index: 9999999; opacity: 1; visibility: visible; background: #f9f5eb; pointer-events: none;';
+
+        html2canvas(pdfTemplate, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#f9f5eb',
+            logging: false
+        }).then(function(canvas) {
+            pdfTemplate.style.cssText = origStyle;
+            const imgData = canvas.toDataURL('image/jpeg', 0.95);
+            const jsPDFClass = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+
+            if (jsPDFClass) {
+                const pdf = new jsPDFClass('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('Convite_Casamento_Alleane_e_Rafael.pdf');
+            } else {
+                const a = document.createElement('a');
+                a.href = imgData;
+                a.download = 'Convite_Casamento_Alleane_e_Rafael.jpg';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(function(){ if (a.parentNode) a.parentNode.removeChild(a); }, 500);
+            }
+            if (btnSpan) btnSpan.innerText = origText;
+        }).catch(function(err) {
+            console.error("Canvas error:", err);
+            pdfTemplate.style.cssText = origStyle;
+            window.print();
+            if (btnSpan) btnSpan.innerText = origText;
+        });
+    } else {
+        window.print();
+        if (btnSpan) btnSpan.innerText = origText;
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* --------------------------------------------------------------------------
