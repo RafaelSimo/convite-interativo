@@ -215,8 +215,39 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
-.continuation-btn:hover {
-    transform: translateY(-2px);
+/* Clean Prominent Info Box Typography */
+.clean-info-card {
+    max-width: 460px;
+    padding: 30px 24px;
+}
+
+.info-prominent-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 22px;
+    padding: 10px 0;
+}
+
+.info-large-text {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: #2a221a;
+}
+
+.info-large-text strong {
+    color: #163e2b;
+    font-weight: 700;
+}
+
+.gift-site-btn.large-site-btn {
+    padding: 16px 24px;
+    font-size: 15px;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 10px 25px rgba(22, 62, 43, 0.35);
 }
 
 /* --------------------------------------------------------------------------
