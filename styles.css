@@ -215,39 +215,122 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
-/* Clean Prominent Info Box Typography */
-.clean-info-card {
-    max-width: 460px;
-    padding: 30px 24px;
+/* --------------------------------------------------------------------------
+   ULTRA-LUXURY INFORMATIONAL MODAL DESIGN
+   -------------------------------------------------------------------------- */
+.luxury-info-modal {
+    max-width: 440px;
+    width: 90vw;
+    background: linear-gradient(155deg, #fdfcf8 0%, #f7f1e5 100%);
+    border: 1.5px solid rgba(197, 155, 39, 0.45);
+    border-radius: 22px;
+    box-shadow: 
+        0 25px 65px rgba(12, 28, 19, 0.45),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+    padding: 36px 26px 32px 26px;
+    text-align: center;
 }
 
-.info-prominent-box {
+.luxury-modal-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 22px;
-    padding: 10px 0;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.info-large-text {
-    font-family: var(--font-body);
-    font-size: 17px;
-    line-height: 1.65;
-    color: #2a221a;
+.luxury-icon-emblem {
+    font-size: 26px;
+    margin-bottom: 8px;
+    filter: drop-shadow(0 2px 4px rgba(197, 155, 39, 0.3));
 }
 
-.info-large-text strong {
-    color: #163e2b;
+.luxury-modal-title {
+    font-family: var(--font-heading);
+    font-size: 23px;
     font-weight: 700;
+    letter-spacing: 2px;
+    color: #163e2b;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
-.gift-site-btn.large-site-btn {
-    padding: 16px 24px;
-    font-size: 15px;
+.luxury-gold-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     width: 100%;
-    max-width: 340px;
-    box-shadow: 0 10px 25px rgba(22, 62, 43, 0.35);
+    max-width: 220px;
+    margin: 0 auto;
+}
+
+.luxury-gold-ornament .ornament-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197, 155, 39, 0.6), transparent);
+}
+
+.luxury-gold-ornament .ornament-symbol {
+    color: #c59b27;
+    font-size: 14px;
+}
+
+.luxury-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.luxury-info-paragraph {
+    font-family: var(--font-heading);
+    font-size: 19px;
+    line-height: 1.7;
+    font-style: italic;
+    color: #382d23;
+    max-width: 370px;
+    margin: 0 auto;
+    letter-spacing: 0.3px;
+}
+
+.luxury-info-paragraph em {
+    font-style: normal;
+    font-weight: 700;
+    color: #163e2b;
+    border-bottom: 1px dashed rgba(197, 155, 39, 0.5);
+    padding-bottom: 1px;
+}
+
+.luxury-emerald-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+    padding: 16px 24px;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #163e2b 0%, #0c261a 100%);
+    border: 1px solid #d9b04d;
+    color: #f2d37c;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 12px 28px rgba(10, 24, 16, 0.4);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.luxury-emerald-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(10, 24, 16, 0.5);
+}
+
+.btn-globe-icon {
+    font-size: 16px;
 }
 
 /* --------------------------------------------------------------------------
