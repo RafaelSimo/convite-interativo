@@ -4,32 +4,247 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   LETTER CONTINUATION SECTION (MATCHING CONTINUAÇÃO.PNG)
+   -------------------------------------------------------------------------- */
+.letter-continuation-section {
+    margin-top: 24px;
+    padding-top: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.letter-divider-gold {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 8px 0;
+}
+
+.letter-divider-gold .gold-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(197, 155, 39, 0.5), transparent);
+}
+
+.letter-divider-gold .gold-diamond {
+    color: #c59b27;
+    font-size: 10px;
+}
+
+/* Dark Forest Emerald & Gold VIP Access Card */
+.vip-access-card {
+    background: linear-gradient(155deg, #163e2b 0%, #0d291b 50%, #081e13 100%);
+    border: 1px solid rgba(230, 194, 104, 0.45);
+    border-radius: 18px;
+    padding: 22px 18px;
+    box-shadow: 
+        0 14px 35px rgba(10, 24, 16, 0.45),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    text-align: left;
+}
+
+.vip-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(230, 194, 104, 0.25);
+    margin-bottom: 14px;
+}
+
+.vip-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vip-check-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid #e6c268;
+    color: #f2d37c;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.vip-title-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.vip-main-title {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #f2d37c;
+}
+
+.vip-sub-title {
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 1px;
+}
+
+.vip-badge-pill {
+    border: 1px solid rgba(230, 194, 104, 0.6);
+    border-radius: 20px;
+    padding: 4px 10px;
+    color: #f2d37c;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    background: rgba(230, 194, 104, 0.1);
+}
+
+.vip-card-description {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 14px;
+}
+
+.vip-pass-item {
+    background: linear-gradient(145deg, #102d1f 0%, #091c13 100%);
+    border: 1px solid rgba(230, 194, 104, 0.3);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.pass-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.pass-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #e6c268;
+}
+
+.pass-code-val {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin: 2px 0;
+}
+
+.pass-category {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.pass-copy-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid rgba(230, 194, 104, 0.4);
+    background: rgba(230, 194, 104, 0.1);
+    color: #f2d37c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.pass-copy-btn:hover {
+    background: rgba(230, 194, 104, 0.25);
+    transform: scale(1.05);
+}
+
+.pass-copy-btn .copy-svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Action Buttons Group (Lista de Presentes & Mensagem dos Noivos) */
+.continuation-actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.continuation-btn {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.continuation-btn.primary-emerald {
+    background: linear-gradient(145deg, #163e2b 0%, #0c261a 100%);
+    border: 1px solid #d9b04d;
+    color: #f2d37c;
+    box-shadow: 0 10px 25px rgba(10, 24, 16, 0.4);
+}
+
+.continuation-btn.secondary-champagne {
+    background: linear-gradient(145deg, #fffcf5 0%, #f7f1e3 100%);
+    border: 1px solid #c99b3b;
+    color: #123623;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.continuation-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
    1. RESET & VARIABLES
    -------------------------------------------------------------------------- */
 :root {
-    --color-emerald-dark: #051a13;
-    --color-emerald-main: #0a3326;
-    --color-emerald-light: #134e3b;
-    --color-emerald-accent: #1c6d53;
+    --color-emerald-dark: #0f2b1d;
+    --color-emerald-main: #173b28;
+    --color-emerald-light: #1e4d36;
+    --color-emerald-accent: #255d42;
+    --color-emerald-flap: #153725;
     
     --color-gold-base: #c59b27;
     --color-gold-light: #f9f2b8;
     --color-gold-dark: #8c6810;
     --gradient-gold: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
     
-    --color-parchment: #f9f5eb;
+    --color-parchment: #fcf8f2;
     --color-parchment-dark: #eedec7;
     --color-ink: #1a1612;
-    --color-wax: #700b10;
-    --color-wax-bright: #9e151b;
 
     --font-heading: 'Cinzel', serif;
     --font-body: 'Cormorant Garamond', serif;
     --font-handwriting: 'Alex Brush', cursive;
     --font-sans: 'Montserrat', sans-serif;
 
-    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.4);
-    --shadow-deep: 0 25px 60px rgba(0, 0, 0, 0.7);
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --shadow-deep: 0 25px 60px rgba(45, 30, 20, 0.35);
     --shadow-gold: 0 0 20px rgba(212, 175, 55, 0.4);
 }
 
@@ -44,16 +259,22 @@ html, body {
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: #0d0906;
+    background-color: #f7eee6;
     background: 
-        radial-gradient(circle at 50% 30%, rgba(35, 25, 18, 0.6) 0%, rgba(5, 3, 2, 0.98) 90%),
-        repeating-linear-gradient(45deg, #1c140e 0px, #140d09 25px, #211812 50px),
-        linear-gradient(to bottom, #18100b, #090503);
-    background-blend-mode: overlay, normal, normal;
+        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 100%),
+        url('silk_bg_perfect.jpg') center center / cover no-repeat fixed;
     font-family: var(--font-body);
     color: var(--color-ink);
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+}
+
+/* Lock Page Scroll Until Envelope Wax Seal is Opened */
+html.lock-scroll,
+body.lock-scroll {
+    overflow: hidden !important;
+    touch-action: none;
+    height: 100vh !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -77,14 +298,14 @@ html, body {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: rgba(10, 51, 38, 0.85);
+    background: rgba(23, 59, 40, 0.9);
     border: 1px solid var(--color-gold-base);
     color: var(--color-gold-light);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
     backdrop-filter: blur(8px);
     transition: transform 0.3s ease;
 }
@@ -103,7 +324,7 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   3. SCENE VIEWPORT & WOOD TABLE (NATURAL FLEXBOX CENTERING)
+   3. SCENE VIEWPORT & WOOD TABLE (LIGHT CHAMPAGNE SILK SCENE)
    -------------------------------------------------------------------------- */
 .scene-viewport {
     position: relative;
@@ -154,44 +375,44 @@ body.state-scene6 .wood-table {
     justify-content: flex-start;
 }
 
-/* Candle Ambient Glow Effects */
+/* Soft Silk Ambient Lighting Spotlights */
 .candle-glow {
     position: fixed;
-    width: 450px;
-    height: 450px;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
     pointer-events: none;
-    opacity: 0.45;
-    animation: candleFlicker 4s infinite alternate ease-in-out;
+    opacity: 0.5;
+    animation: candleFlicker 5s infinite alternate ease-in-out;
     z-index: 1;
 }
 
 .candle-left {
-    top: 10%;
-    left: 10%;
-    background: radial-gradient(circle, rgba(255, 170, 70, 0.35) 0%, rgba(255, 120, 20, 0) 70%);
+    top: 5%;
+    left: 5%;
+    background: radial-gradient(circle, rgba(255, 245, 220, 0.7) 0%, rgba(255, 235, 190, 0) 70%);
 }
 
 .candle-right {
-    bottom: 15%;
-    right: 12%;
-    background: radial-gradient(circle, rgba(255, 185, 90, 0.3) 0%, rgba(255, 140, 30, 0) 70%);
-    animation-delay: 1.5s;
+    bottom: 10%;
+    right: 8%;
+    background: radial-gradient(circle, rgba(255, 240, 210, 0.6) 0%, rgba(255, 225, 180, 0) 70%);
+    animation-delay: 2s;
 }
 
 @keyframes candleFlicker {
-    0% { opacity: 0.35; transform: scale(0.98); }
-    50% { opacity: 0.48; transform: scale(1.03); }
-    100% { opacity: 0.42; transform: scale(1); }
+    0% { opacity: 0.45; transform: scale(0.98); }
+    50% { opacity: 0.6; transform: scale(1.03); }
+    100% { opacity: 0.5; transform: scale(1); }
 }
 
 /* --------------------------------------------------------------------------
-   4. CENTRAL EXPERIENCE LAYOUT CONTAINER & LUXURY ROYAL ENVELOPE
+   4. CENTRAL EXPERIENCE LAYOUT CONTAINER & REALISTIC ENVELOPE (MATCHING PHOTO)
    -------------------------------------------------------------------------- */
 .experience-container {
     position: relative;
-    width: 380px;
-    max-width: 90vw;
+    width: 400px;
+    max-width: 92vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -214,71 +435,65 @@ body.state-scene6 .experience-container {
     margin: 10px auto 0 auto;
 }
 
-/* Luxury Royal Emerald Green Envelope */
+/* Photorealistic Forest Emerald Green Suede (Camurça 3D) Envelope (Matching convite.jpeg) */
 .envelope {
     position: relative;
-    width: 380px;
-    height: 260px;
+    width: 410px;
+    height: 272px;
     max-width: 92vw;
-    background: linear-gradient(135deg, #0a3a2b 0%, #031c14 60%, #010e0a 100%);
-    border-radius: 10px;
-    box-shadow: 0 30px 75px rgba(0, 0, 0, 0.95), 0 0 45px rgba(197, 155, 39, 0.4);
-    border: 2px solid var(--color-gold-base);
+    background: linear-gradient(145deg, #22543d 0%, #173d2a 50%, #0d261a 100%);
+    border-radius: 4px;
+    box-shadow: 
+        0 35px 80px rgba(15, 8, 3, 0.65),
+        0 12px 30px rgba(0, 0, 0, 0.45),
+        inset 0 1px 1.5px rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease;
     z-index: 10;
+    overflow: visible;
 }
 
-/* Royal Damask Velvet Pattern Overlay */
-.envelope-damask-pattern {
+/* Real Suede Velvet Fabric Texture & Sheen Overlay */
+.envelope-suede-texture-overlay {
     position: absolute;
     inset: 0;
-    border-radius: 10px;
-    opacity: 0.14;
-    background-image: radial-gradient(#c59b27 1.5px, transparent 1.5px), radial-gradient(#c59b27 1.5px, #041a12 1.5px);
-    background-size: 24px 24px;
-    background-position: 0 0, 12px 12px;
+    border-radius: 4px;
+    background: 
+        radial-gradient(ellipse at 28% 20%, rgba(255, 255, 255, 0.22) 0%, transparent 62%),
+        radial-gradient(ellipse at 75% 82%, rgba(0, 0, 0, 0.35) 0%, transparent 68%),
+        repeating-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06) 0px, rgba(0, 0, 0, 0.12) 2px, transparent 4px);
+    background-size: 100% 100%, 100% 100%, 4px 4px;
     pointer-events: none;
     z-index: 2;
 }
 
-/* Gold Foil Double Frame */
-.envelope-gold-frame {
+/* Unified Directional Fixed Studio Spotlight Reflection driven by Gyroscope/Mouse */
+.scene-spotlight-reflection {
     position: absolute;
-    inset: 10px;
-    border: 1.5px solid var(--color-gold-base);
-    outline: 1px dashed rgba(253, 245, 186, 0.45);
-    outline-offset: -5px;
-    border-radius: 6px;
-    opacity: 0.9;
+    inset: -2px;
+    border-radius: 4px;
+    background: 
+        radial-gradient(ellipse at var(--spotlight-x, 24%) var(--spotlight-y, 18%), rgba(255, 252, 235, 0.45) 0%, rgba(255, 240, 200, 0.15) 38%, transparent 68%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.24) 0%, transparent 48%);
     pointer-events: none;
-    z-index: 7;
-}
-
-/* Filigree Gold Corner Flourishes */
-.gold-corner {
-    position: absolute;
-    width: 46px;
-    height: 46px;
     z-index: 9;
-    pointer-events: none;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));
+    mix-blend-mode: overlay;
+    will-change: background;
 }
 
-.corner-tl { top: 6px; left: 6px; }
-.corner-tr { top: 6px; right: 6px; }
-.corner-bl { bottom: 6px; left: 6px; }
-.corner-br { bottom: 6px; right: 6px; }
-
-/* Vertical Royal Gold Satin Ribbon Wrap (Passing Behind Wax Seal) */
+/* Vertical Gold Ribbon Wrap (Matte Gold Matching Wax Seal) */
 .gold-ribbon-band.vertical {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 44px;
+    width: 52px;
     height: 100%;
-    background: var(--gradient-gold);
-    box-shadow: 0 0 16px rgba(0,0,0,0.6), inset 2px 0 4px rgba(255,255,255,0.45);
+    background: linear-gradient(90deg, #8c6725 0%, #ba903d 15%, #e6c268 35%, #f2d37c 50%, #e1b854 68%, #b08530 85%, #735017 100%);
+    box-shadow: 
+        0 0 10px rgba(0,0,0,0.35),
+        inset 1px 0 2px rgba(255, 255, 255, 0.4),
+        inset -1px 0 2px rgba(0, 0, 0, 0.3);
     z-index: 8;
     pointer-events: none;
     transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
@@ -288,12 +503,12 @@ body.state-scene6 .experience-container {
     position: absolute;
     top: 0;
     height: 100%;
-    width: 2px;
-    background: rgba(255, 255, 255, 0.65);
+    width: 1px;
+    background: rgba(255, 255, 255, 0.45);
 }
 
-.gold-ribbon-band.vertical .ribbon-gold-line.left { left: 4px; }
-.gold-ribbon-band.vertical .ribbon-gold-line.right { right: 4px; }
+.gold-ribbon-band.vertical .ribbon-gold-line.left { left: 5px; }
+.gold-ribbon-band.vertical .ribbon-gold-line.right { right: 5px; }
 
 /* Ribbon Dropping Animation */
 .gold-ribbon-band.ribbon-dropped {
@@ -304,72 +519,69 @@ body.state-scene6 .experience-container {
 .envelope-back {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, #155541, #06241b);
-    border-radius: 10px;
+    background: radial-gradient(circle at center, #153725, #0b1f14);
+    border-radius: 4px;
     overflow: hidden;
     z-index: 1;
 }
 
-.envelope-pattern {
+.pocket-shadow {
     position: absolute;
     inset: 0;
-    opacity: 0.18;
-    background-image: repeating-linear-gradient(45deg, var(--color-gold-base) 0, var(--color-gold-base) 1px, transparent 0, transparent 18px);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 40%);
+    pointer-events: none;
 }
 
-/* Envelope Flaps */
+/* Photorealistic SVG Envelope Flap Panels */
 .envelope-flap {
     position: absolute;
     pointer-events: none;
 }
 
+.flap-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .flap-left {
     top: 0;
     left: 0;
-    width: 0;
-    height: 0;
-    border-top: 130px solid transparent;
-    border-bottom: 130px solid transparent;
-    border-left: 190px solid #0f4736;
-    filter: drop-shadow(2px 0 6px rgba(0,0,0,0.4));
+    width: 200px;
+    height: 265px;
     z-index: 4;
+    filter: drop-shadow(2px 0 4px rgba(0,0,0,0.3));
 }
 
 .flap-right {
     top: 0;
     right: 0;
-    width: 0;
-    height: 0;
-    border-top: 130px solid transparent;
-    border-bottom: 130px solid transparent;
-    border-right: 190px solid #0f4736;
-    filter: drop-shadow(-2px 0 6px rgba(0,0,0,0.4));
+    width: 200px;
+    height: 265px;
     z-index: 4;
+    filter: drop-shadow(-2px 0 4px rgba(0,0,0,0.3));
 }
 
 .flap-bottom {
     bottom: 0;
     left: 0;
-    width: 0;
-    height: 0;
-    border-left: 190px solid transparent;
-    border-right: 190px solid transparent;
-    border-bottom: 140px solid #083325;
+    width: 400px;
+    height: 145px;
     z-index: 5;
 }
 
 .flap-top {
     top: 0;
     left: 0;
-    width: 0;
-    height: 0;
-    border-left: 190px solid transparent;
-    border-right: 190px solid transparent;
-    border-top: 145px solid #165b46;
+    width: 400px;
+    height: 152px;
     transform-origin: top center;
     transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 6;
-    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+}
+
+.top-svg {
+    overflow: visible;
 }
 
 .envelope.opened .flap-top {
@@ -377,7 +589,7 @@ body.state-scene6 .experience-container {
     z-index: 1;
 }
 
-/* Keep envelope static and prominent during opening sequence in Scene 1, 2, 3, and 4 */
+/* Keep envelope static and prominent during opening sequence */
 body.state-scene1 .envelope,
 body.state-scene2 .envelope,
 body.state-scene3 .envelope,
@@ -387,7 +599,6 @@ body.state-scene4 .envelope {
     z-index: 5;
 }
 
-/* Envelope gently rests in background in Scene 5+ after letter and menus are displayed */
 body.state-scene5 .envelope,
 body.state-scene6 .envelope {
     transform: translateY(180px) scale(0.8);
@@ -395,105 +606,37 @@ body.state-scene6 .envelope {
     z-index: 1;
 }
 
-/* Handcrafted 3D Royal Wax Seal with Melted Drips & Official AR Monogram */
+/* 100% Exact Photorealistic Wax Seal Extracted Directly from convite.jpeg */
 .wax-seal {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 104px;
-    height: 104px;
-    z-index: 20; /* Sits ON TOP of vertical gold ribbon */
+    width: 114px;
+    height: 114px;
+    z-index: 20;
     cursor: pointer;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
 }
 
-.wax-seal.cracked {
-    transform: translate(-50%, 140px) rotate(22deg) scale(0.5);
-    opacity: 0;
+.real-photo-seal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: 
+        drop-shadow(0 14px 28px rgba(18, 10, 4, 0.6)) 
+        drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
     pointer-events: none;
-}
-
-.seal-glow {
-    position: absolute;
-    inset: -16px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.85) 0%, rgba(255, 215, 0, 0) 70%);
-    animation: sealPulse 2s infinite ease-in-out;
-    pointer-events: none;
+    transition: transform 0.3s ease;
 }
 
 @keyframes sealPulse {
-    0%, 100% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.25); opacity: 1; }
+    0%, 100% { transform: scale(1); opacity: 0.45; }
+    50% { transform: scale(1.18); opacity: 0.85; }
 }
 
 .wax-seal:hover {
     transform: translate(-50%, -50%) scale(1.08);
-}
-
-/* Melted Wax Drips */
-.wax-drip {
-    position: absolute;
-    background: radial-gradient(circle at center, #d81f28, #540308);
-    border-radius: 50%;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.7));
-    z-index: 1;
-}
-
-.drip-1 {
-    bottom: -8px;
-    right: 18px;
-    width: 16px;
-    height: 22px;
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-}
-
-.drip-2 {
-    bottom: -12px;
-    left: 22px;
-    width: 18px;
-    height: 26px;
-    border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
-}
-
-/* Handcrafted Organic Melted Wax Silhouette */
-.organic-wax-shape {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 48% 52% 49% 51% / 51% 48% 52% 49%;
-    background: radial-gradient(circle at 35% 25%, #e6232c 0%, #a81018 45%, #420206 90%);
-    border: 2px solid #e0b438;
-    box-shadow: 
-        0 14px 32px rgba(0, 0, 0, 0.92),
-        inset 0 4px 8px rgba(255, 255, 255, 0.5),
-        inset 0 -6px 12px rgba(0, 0, 0, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-}
-
-.wax-inner-well {
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #990d14 0%, #450206 100%);
-    border: 2px solid rgba(245, 215, 110, 0.85);
-    box-shadow: 
-        inset 0 5px 10px rgba(0,0,0,0.9),
-        0 2px 4px rgba(255,255,255,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.official-seal-logo {
-    width: 62px;
-    height: 62px;
-    object-fit: contain;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.9)) brightness(1.08);
 }
 
 .wax-seal.depressed {
@@ -1159,32 +1302,43 @@ body.state-scene6 .envelope {
 
     .envelope {
         width: 320px;
-        height: 220px;
+        height: 215px;
     }
+    
+    .wax-seal {
+        width: 96px;
+        height: 96px;
+    }
+
+    .wax-logo-container {
+        width: 60px;
+        height: 60px;
+    }
+
     .official-seal-logo {
         width: 48px;
         height: 48px;
     }
 
+    .gold-ribbon-band.vertical {
+        width: 42px;
+    }
+
     .flap-left {
-        border-top-width: 110px;
-        border-bottom-width: 110px;
-        border-left-width: 160px;
+        width: 160px;
+        height: 212px;
     }
     .flap-right {
-        border-top-width: 110px;
-        border-bottom-width: 110px;
-        border-right-width: 160px;
+        width: 160px;
+        height: 212px;
     }
     .flap-bottom {
-        border-left-width: 160px;
-        border-right-width: 160px;
-        border-bottom-width: 120px;
+        width: 320px;
+        height: 116px;
     }
     .flap-top {
-        border-left-width: 160px;
-        border-right-width: 160px;
-        border-top-width: 120px;
+        width: 320px;
+        height: 122px;
     }
 
     .letter-slide {

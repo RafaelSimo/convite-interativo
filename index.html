@@ -47,57 +47,136 @@
             <!-- Central Content Layout Container -->
             <div id="experience-container" class="experience-container">
                 
-                <!-- 1. Luxury Royal Emerald Green Envelope with Gold Satin Ribbon & Damask Pattern -->
-                <div id="envelope" class="envelope royal-envelope">
-                    <!-- Royal Damask Pattern Overlay -->
-                    <div class="envelope-damask-pattern"></div>
-                    <div class="envelope-gold-frame"></div>
+                <!-- 1. Photorealistic Forest Emerald Green Suede (Camurça 3D) Envelope with Studio Lighting & Gold Ribbon -->
+                <div id="envelope" class="envelope realistic-envelope 3d-suede-envelope">
+                    <!-- Real Suede Velvet Fabric Texture & Sheen Overlay -->
+                    <div class="envelope-suede-texture-overlay"></div>
 
-                    <!-- Filigree Gold Corner Flourishes -->
-                    <svg class="gold-corner corner-tl" viewBox="0 0 50 50">
-                        <path d="M0,0 L50,0 L50,6 Q20,6 6,20 L6,50 L0,50 Z M12,12 Q20,12 25,25 Q12,20 12,12 Z" fill="url(#crestGold)"/>
-                    </svg>
-                    <svg class="gold-corner corner-tr" viewBox="0 0 50 50">
-                        <path d="M50,0 L0,0 L0,6 Q30,6 44,20 L44,50 L50,50 Z M38,12 Q30,12 25,25 Q38,20 38,12 Z" fill="url(#crestGold)"/>
-                    </svg>
-                    <svg class="gold-corner corner-bl" viewBox="0 0 50 50">
-                        <path d="M0,50 L50,50 L50,44 Q20,44 6,30 L6,0 L0,0 Z M12,38 Q20,38 25,25 Q12,30 12,38 Z" fill="url(#crestGold)"/>
-                    </svg>
-                    <svg class="gold-corner corner-br" viewBox="0 0 50 50">
-                        <path d="M50,50 L0,50 L0,44 Q30,44 44,30 L44,0 L50,0 Z M38,38 Q30,38 25,25 Q38,30 38,38 Z" fill="url(#crestGold)"/>
+                    <!-- Directional Studio Spotlight Reflection across Envelope, Ribbon & Seal -->
+                    <div class="scene-spotlight-reflection"></div>
+
+                    <!-- Envelope Back Interior (inside pocket when flap opens) -->
+                    <div class="envelope-back">
+                        <div class="pocket-shadow"></div>
+                    </div>
+                    
+                    <!-- SVG Shared Texture Definitions (3D Suede Grain & Ribbon Satin) -->
+                    <svg width="0" height="0" style="position:absolute; pointer-events:none;">
+                        <defs>
+                            <!-- Real Velvet Suede (Camurça 3D) Fiber Pattern -->
+                            <pattern id="suedeGrainPattern" width="4" height="4" patternUnits="userSpaceOnUse">
+                                <rect width="4" height="4" fill="rgba(0,0,0,0.08)" />
+                                <circle cx="1" cy="1" r="0.85" fill="rgba(255,255,255,0.11)" />
+                                <circle cx="3" cy="3" r="0.85" fill="rgba(255,255,255,0.07)" />
+                                <circle cx="1" cy="3" r="0.6" fill="rgba(0,0,0,0.14)" />
+                            </pattern>
+
+                            <!-- Woven Satin Silk Ribbon Pattern -->
+                            <pattern id="satinSilkWeave" width="4" height="6" patternUnits="userSpaceOnUse">
+                                <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" />
+                                <line x1="2" y1="0" x2="2" y2="6" stroke="rgba(0,0,0,0.12)" stroke-width="1" />
+                            </pattern>
+                        </defs>
                     </svg>
 
-                    <!-- Vertical Royal Gold Satin Ribbon Wrap (Passing Behind Wax Seal) -->
+                    <!-- Real Suede (Camurça 3D) Flap Panels with Volumetric Fold Shadows & Seams -->
+                    <!-- Left Flap Panel -->
+                    <div class="envelope-flap flap-left">
+                        <svg class="flap-svg" viewBox="0 0 200 265" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="gradFlapLeft" x1="0%" y1="0%" x2="100%" y2="50%">
+                                    <stop offset="0%" stop-color="#22543d" />
+                                    <stop offset="65%" stop-color="#183e2b" />
+                                    <stop offset="100%" stop-color="#102c1e" />
+                                </linearGradient>
+                            </defs>
+                            <polygon points="0,0 200,132.5 0,265" fill="url(#gradFlapLeft)" />
+                            <polygon points="0,0 200,132.5 0,265" fill="url(#suedeGrainPattern)" opacity="0.85" />
+                            <line x1="0" y1="0" x2="200" y2="132.5" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+                            <line x1="200" y1="132.5" x2="0" y2="265" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" />
+                        </svg>
+                    </div>
+
+                    <!-- Right Flap Panel -->
+                    <div class="envelope-flap flap-right">
+                        <svg class="flap-svg" viewBox="0 0 200 265" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="gradFlapRight" x1="100%" y1="0%" x2="0%" y2="50%">
+                                    <stop offset="0%" stop-color="#22543d" />
+                                    <stop offset="65%" stop-color="#183e2b" />
+                                    <stop offset="100%" stop-color="#102c1e" />
+                                </linearGradient>
+                            </defs>
+                            <polygon points="200,0 0,132.5 200,265" fill="url(#gradFlapRight)" />
+                            <polygon points="200,0 0,132.5 200,265" fill="url(#suedeGrainPattern)" opacity="0.85" />
+                            <line x1="200" y1="0" x2="0" y2="132.5" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
+                            <line x1="0" y1="132.5" x2="200" y2="265" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" />
+                        </svg>
+                    </div>
+
+                    <!-- Bottom Flap Panel -->
+                    <div class="envelope-flap flap-bottom">
+                        <svg class="flap-svg" viewBox="0 0 400 145" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="gradFlapBottom" x1="50%" y1="100%" x2="50%" y2="0%">
+                                    <stop offset="0%" stop-color="#163f2b" />
+                                    <stop offset="100%" stop-color="#0d261a" />
+                                </linearGradient>
+                            </defs>
+                            <polygon points="0,145 200,0 400,145" fill="url(#gradFlapBottom)" />
+                            <polygon points="0,145 200,0 400,145" fill="url(#suedeGrainPattern)" opacity="0.85" />
+                            <polyline points="0,145 200,0 400,145" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.2" />
+                        </svg>
+                    </div>
+
+                    <!-- Top Flap Panel (V-Flap with heavy volumetric 3D drop shadow) -->
+                    <div id="top-flap" class="envelope-flap flap-top">
+                        <svg class="flap-svg top-svg" viewBox="0 0 400 152" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="gradFlapTop" x1="50%" y1="0%" x2="50%" y2="100%">
+                                    <stop offset="0%" stop-color="#265a41" />
+                                    <stop offset="70%" stop-color="#1d4934" />
+                                    <stop offset="100%" stop-color="#143827" />
+                                </linearGradient>
+                                <filter id="topFlapShadow" x="-20%" y="-20%" width="140%" height="160%">
+                                    <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000000" flood-opacity="0.75" />
+                                    <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#08180e" flood-opacity="0.5" />
+                                </filter>
+                            </defs>
+                            <polygon points="0,0 400,0 200,152" fill="url(#gradFlapTop)" filter="url(#topFlapShadow)" />
+                            <polygon points="0,0 400,0 200,152" fill="url(#suedeGrainPattern)" opacity="0.85" />
+                            <!-- Upper Fold Bevel Line -->
+                            <line x1="0" y1="1.5" x2="400" y2="1.5" stroke="rgba(255,255,255,0.28)" stroke-width="2" />
+                            <!-- Cut suede edge highlights along V seam -->
+                            <polyline points="0,0 200,152 400,0" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.8" />
+                        </svg>
+                    </div>
+
+                    <!-- Vertical Gold Ribbon Wrap (Matte Gold Matching Wax Seal with Directional Sheen) -->
                     <div id="gold-ribbon" class="gold-ribbon-band vertical">
+                        <svg class="ribbon-texture-svg" width="100%" height="100%" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="ribbonSatinGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#8c6725" />
+                                    <stop offset="15%" stop-color="#ba903d" />
+                                    <stop offset="35%" stop-color="#e6c268" />
+                                    <stop offset="50%" stop-color="#f2d37c" />
+                                    <stop offset="68%" stop-color="#e1b854" />
+                                    <stop offset="85%" stop-color="#b08530" />
+                                    <stop offset="100%" stop-color="#735017" />
+                                </linearGradient>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#ribbonSatinGrad)" />
+                            <rect width="100%" height="100%" fill="url(#satinSilkWeave)" opacity="0.4" />
+                        </svg>
                         <div class="ribbon-gold-line left"></div>
                         <div class="ribbon-gold-line right"></div>
                     </div>
 
-                    <!-- Envelope Back Interior -->
-                    <div class="envelope-back">
-                        <div class="envelope-pattern"></div>
-                    </div>
-                    
-                    <!-- Envelope Flaps -->
-                    <div class="envelope-flap flap-left"></div>
-                    <div class="envelope-flap flap-right"></div>
-                    <div class="envelope-flap flap-bottom"></div>
-                    <div id="top-flap" class="envelope-flap flap-top">
-                        <div class="flap-gold-edge"></div>
-                    </div>
-
-                    <!-- Handcrafted 3D Royal Wax Seal with Melted Drips & Official AR Monogram -->
+                    <!-- Photorealistic 3D Gold Wax Seal (Unified, Unbroken & Matched to Ribbon) -->
                     <div id="wax-seal" class="wax-seal" title="Toque para abrir o convite">
                         <div class="seal-glow"></div>
-                        <div class="seal-body organic-wax-shape">
-                            <div class="wax-drip drip-1"></div>
-                            <div class="wax-drip drip-2"></div>
-                            <div class="wax-outer-rim"></div>
-                            <div class="wax-inner-well">
-                                <img src="logo.png" class="official-seal-logo" alt="Logo Monograma Noivos">
-                            </div>
-                            <div class="seal-crack-lines"></div>
-                        </div>
+                        <img src="seal_gold_ribbon_match.png" class="real-photo-seal-img" alt="Selo de Cera Dourado Monograma AR">
                     </div>
                 </div>
 
@@ -148,38 +227,65 @@
                                         </svg>
                                     </div>
                                 </div>
+
+                                <!-- CONTINUAÇÃO DA CARTA DE LUXO (Matching continuação.png) -->
+                                <div class="letter-continuation-section">
+                                    <!-- Golden Ornamental Divider -->
+                                    <div class="letter-divider-gold">
+                                        <span class="gold-line left"></span>
+                                        <span class="gold-diamond">◆</span>
+                                        <span class="gold-line right"></span>
+                                    </div>
+
+                                    <!-- Dark Forest Emerald & Gold VIP Access Card -->
+                                    <div class="vip-access-card">
+                                        <div class="vip-card-header">
+                                            <div class="vip-title-group">
+                                                <span class="vip-check-icon">✓</span>
+                                                <div class="vip-title-text">
+                                                    <span class="vip-main-title">PRESENÇA CONFIRMADA</span>
+                                                    <span class="vip-sub-title">SENHAS DE ACESSO</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p class="vip-card-description">
+                                            Sua presença já está confirmada em nossa lista oficial! Apresente uma das senhas abaixo no check-in ou recepção do evento:
+                                        </p>
+
+                                        <!-- Senha 1 -->
+                                        <div class="vip-pass-item">
+                                            <div class="pass-info">
+                                                <span class="pass-label">CONVIDADO 01</span>
+                                                <strong class="pass-code-val">SENHA 1</strong>
+                                            </div>
+                                        </div>
+
+                                        <!-- Senha 2 -->
+                                        <div class="vip-pass-item">
+                                            <div class="pass-info">
+                                                <span class="pass-label">CONVIDADO 02</span>
+                                                <strong class="pass-code-val">SENHA 2</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons Group (Lista de Presentes & Informações Importantes) -->
+                                    <div class="continuation-actions-group">
+                                        <button id="btn-gifts" type="button" class="continuation-btn primary-emerald">
+                                            <span class="btn-icon">🎁</span>
+                                            <span class="btn-label">LISTA DE PRESENTES</span>
+                                        </button>
+
+                                        <button id="btn-story" type="button" class="continuation-btn secondary-champagne">
+                                            <span class="btn-icon">ℹ️</span>
+                                            <span class="btn-label">INFORMAÇÕES IMPORTANTES</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
-                    </div>
-                </div>
-
-                <!-- 3. Menus Container (Positioned BELOW the Letter) -->
-                <div id="menus-container" class="menus-container hidden-menus">
-                    <!-- Senhas Card -->
-                    <div id="scroll-left" class="scroll-card">
-                        <div class="scroll-card-header">🔑 SEUS CONVITES</div>
-                        <div class="pass-box">
-                            <span class="pass-tag">CONVIDADO 01</span>
-                            <strong class="pass-code">SENHA 1</strong>
-                        </div>
-                        <div class="pass-box">
-                            <span class="pass-tag">CONVIDADO 02</span>
-                            <strong class="pass-code">SENHA 2</strong>
-                        </div>
-                    </div>
-
-                    <!-- Menu Card (Lista de Presentes & Mensagem) -->
-                    <div id="scroll-right" class="scroll-card">
-                        <div class="scroll-card-header">MENU DE OPÇÕES</div>
-                        <button id="btn-gifts" class="scroll-action-btn">
-                            <span class="btn-icon">🎁</span>
-                            <span class="btn-text">Lista de Presentes</span>
-                        </button>
-                        <button id="btn-story" class="scroll-action-btn">
-                            <span class="btn-icon">✉️</span>
-                            <span class="btn-text">Mensagem dos Noivos</span>
-                        </button>
                     </div>
                 </div>
 
@@ -239,25 +345,6 @@
                         <p>Por favor, apresentem suas senhas individuais de acesso (SENHA 1 / SENHA 2) na recepção do evento.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-                        <div class="timeline-date">2019</div>
-                        <div class="timeline-content">
-                            <h3>O Primeiro Olhar</h3>
-                            <p>Nos conhecemos durante um café num final de tarde ensolarado. Uma conversa de 10 minutos se transformou em horas inesquecíveis.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-date">2021</div>
-                        <div class="timeline-content">
-                            <h3>O Primeiro "Sim"</h3>
-                            <p>Iniciamos nossa jornada juntos, descobrindo o prazer de compartilhar sonhos, viagens, risadas e pequenos momentos do dia a dia.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
             </div>
         </div>
     </div>

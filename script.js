@@ -167,10 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height + canvas.height * 0.2;
             this.radius = Math.random() * 2 + 0.8;
-            this.alpha = Math.random() * 0.7 + 0.3;
+            this.alpha = Math.random() * 0.5 + 0.2;
             this.speedY = -(Math.random() * 0.5 + 0.2);
             this.speedX = (Math.random() - 0.5) * 0.3;
-            this.hue = Math.random() < 0.8 ? 45 : 30; // Golden & warm amber
+            this.hue = Math.random() < 0.8 ? 42 : 28; // Delicate gold & champagne motes
             this.pulse = Math.random() * 0.02 + 0.01;
         }
 
@@ -189,9 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.save();
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${this.hue}, 85%, 65%, ${Math.max(0, this.alpha)})`;
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = `hsl(${this.hue}, 100%, 50%)`;
+            ctx.fillStyle = `hsla(${this.hue}, 70%, 45%, ${Math.max(0, this.alpha * 0.65)})`;
+            ctx.shadowBlur = 6;
+            ctx.shadowColor = `hsl(${this.hue}, 75%, 40%)`;
             ctx.fill();
             ctx.restore();
         }
@@ -216,6 +216,92 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initParticles();
     animateParticles();
+
+    /* --------------------------------------------------------------------------
+       2B. GYROSCOPE / DEVICE ORIENTATION & FIXED LIGHT REFLECTION ENGINE
+       -------------------------------------------------------------------------- */
+    let targetTiltX = 0; // rotateX
+    let targetTiltY = 0; // rotateY
+    let currentTiltX = 0;
+    let currentTiltY = 0;
+    let hasGyroscope = false;
+
+    // Mobile Gyroscope Listener (DeviceOrientation)
+    function handleDeviceOrientation(e) {
+        if (e.beta !== null && e.gamma !== null && e.beta !== undefined) {
+            hasGyroscope = true;
+            const betaNorm = e.beta - 40; // Resting holding angle ~40deg
+            targetTiltX = Math.max(-20, Math.min(20, -betaNorm * 0.45));
+            targetTiltY = Math.max(-24, Math.min(24, e.gamma * 0.5));
+        }
+    }
+
+    if (window.DeviceOrientationEvent) {
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+            const requestGyro = function() {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            window.addEventListener('deviceorientation', handleDeviceOrientation, true);
+                        }
+                    })
+                    .catch(console.error);
+            };
+            document.addEventListener('touchstart', requestGyro, { once: true });
+            document.addEventListener('click', requestGyro, { once: true });
+        } else {
+            window.addEventListener('deviceorientation', handleDeviceOrientation, true);
+        }
+    }
+
+    // Mobile Touch Drag & Tilt Fallback (Works 100% on HTTP and all Mobile Browsers)
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches.length > 0) {
+            const touch = e.touches[0];
+            const cx = window.innerWidth / 2;
+            const cy = window.innerHeight / 2;
+            const dx = (touch.clientX - cx) / cx;
+            const dy = (touch.clientY - cy) / cy;
+
+            targetTiltX = -dy * 18;
+            targetTiltY = dx * 20;
+        }
+    }, { passive: true });
+
+    // Desktop Mouse Movement Parallax Fallback
+    window.addEventListener('mousemove', (e) => {
+        if (hasGyroscope) return;
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const dx = (e.clientX - cx) / cx;
+        const dy = (e.clientY - cy) / cy;
+
+        targetTiltX = -dy * 16;
+        targetTiltY = dx * 18;
+    });
+
+    // 60FPS LERP Animation Loop for 3D Envelope Motion & Fixed Light Reflection
+    function updateEnvelope3DMotion() {
+        currentTiltX += (targetTiltX - currentTiltX) * 0.08;
+        currentTiltY += (targetTiltY - currentTiltY) * 0.08;
+
+        if (envelope && (currentScene === 1 || currentScene === 2)) {
+            if (!envelope.classList.contains('opened')) {
+                envelope.style.transform = `perspective(1000px) rotateX(${currentTiltX.toFixed(2)}deg) rotateY(${currentTiltY.toFixed(2)}deg) translateZ(10px)`;
+            }
+
+            // Fixed Light Point in 3D Space (Top-Left ~24% x 18%)
+            const spotlightX = 24 - currentTiltY * 1.35;
+            const spotlightY = 18 - currentTiltX * 1.35;
+
+            envelope.style.setProperty('--spotlight-x', `${spotlightX.toFixed(1)}%`);
+            envelope.style.setProperty('--spotlight-y', `${spotlightY.toFixed(1)}%`);
+        }
+
+        requestAnimationFrame(updateEnvelope3DMotion);
+    }
+
+    updateEnvelope3DMotion();
 
     /* --------------------------------------------------------------------------
        3. BACKGROUND MUSIC & AUDIO ENGINE (SOFT AMBIENT VOLUME)
@@ -269,8 +355,9 @@ document.addEventListener('DOMContentLoaded', () => {
        4. SCENE SEQUENCER (CENAS 1 A 6)
        -------------------------------------------------------------------------- */
 
-    // Scene 1: Initial camera zoom down onto dark table (Auto on load)
-    body.className = 'state-scene1';
+    // Scene 1: Initial view showing ONLY the envelope (Scroll LOCKED)
+    document.documentElement.classList.add('lock-scroll');
+    body.className = 'state-scene1 lock-scroll';
 
     let sealOpened = false;
 
@@ -280,6 +367,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (currentScene > 1) return;
         currentScene = 2;
+
+        // Unlock page scrolling as soon as seal is clicked
+        document.documentElement.classList.remove('lock-scroll');
+        body.classList.remove('lock-scroll');
 
         // Play background music on seal tap
         if (bgMusic && !isAudioPlaying) {
