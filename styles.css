@@ -382,7 +382,7 @@ html, body {
     background-color: #f7eee6;
     background: 
         radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 100%),
-        url('silk_bg_perfect.jpg') center center / cover no-repeat fixed;
+        url('assets/img/silk_bg_perfect.jpg') center center / cover no-repeat fixed;
     font-family: var(--font-body);
     color: var(--color-ink);
     user-select: none;
