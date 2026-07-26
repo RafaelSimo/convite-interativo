@@ -381,8 +381,8 @@ html, body {
     overflow-y: auto;
     background-color: #f7eee6;
     background: 
-        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 100%),
-        url('assets/img/silk_bg_perfect.jpg') center center / cover no-repeat fixed;
+        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+        url('assets/img/beige_bokeh_bg.jpg?v=20260725_30') center center / cover no-repeat fixed;
     font-family: var(--font-body);
     color: var(--color-ink);
     user-select: none;
@@ -555,34 +555,29 @@ body.state-scene6 .experience-container {
     margin: 10px auto 0 auto;
 }
 
-/* Photorealistic Forest Emerald Green Suede (Camurça 3D) Envelope (Matching convite.jpeg) */
 .envelope {
     position: relative;
     width: 410px;
     height: 272px;
     max-width: 92vw;
-    background: linear-gradient(145deg, #22543d 0%, #173d2a 50%, #0d261a 100%);
+    background: #173d2a url('assets/img/envelope_paper_texture.jpg?v=20260725_200') center center / cover repeat;
     border-radius: 4px;
     box-shadow: 
-        0 35px 80px rgba(15, 8, 3, 0.65),
-        0 12px 30px rgba(0, 0, 0, 0.45),
-        inset 0 1px 1.5px rgba(255, 255, 255, 0.22);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+        0 40px 90px rgba(0, 0, 0, 0.7),
+        0 15px 35px rgba(0, 0, 0, 0.45);
     transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease;
     z-index: 10;
     overflow: visible;
 }
 
-/* Real Suede Velvet Fabric Texture & Sheen Overlay */
+/* Clean Studio Light Sheen Overlay for Pure Natural Handmade Paper Photo */
 .envelope-suede-texture-overlay {
     position: absolute;
     inset: 0;
     border-radius: 4px;
     background: 
-        radial-gradient(ellipse at 28% 20%, rgba(255, 255, 255, 0.22) 0%, transparent 62%),
-        radial-gradient(ellipse at 75% 82%, rgba(0, 0, 0, 0.35) 0%, transparent 68%),
-        repeating-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.06) 0px, rgba(0, 0, 0, 0.12) 2px, transparent 4px);
-    background-size: 100% 100%, 100% 100%, 4px 4px;
+        radial-gradient(ellipse at 28% 20%, rgba(255, 255, 255, 0.18) 0%, transparent 62%),
+        radial-gradient(ellipse at 75% 82%, rgba(0, 0, 0, 0.3) 0%, transparent 68%);
     pointer-events: none;
     z-index: 2;
 }
@@ -593,42 +588,36 @@ body.state-scene6 .experience-container {
     inset: -2px;
     border-radius: 4px;
     background: 
-        radial-gradient(ellipse at var(--spotlight-x, 24%) var(--spotlight-y, 18%), rgba(255, 252, 235, 0.45) 0%, rgba(255, 240, 200, 0.15) 38%, transparent 68%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.24) 0%, transparent 48%);
+        radial-gradient(ellipse at var(--spotlight-x, 24%) var(--spotlight-y, 18%), rgba(255, 252, 235, 0.5) 0%, rgba(255, 240, 200, 0.2) 38%, transparent 68%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 48%);
     pointer-events: none;
     z-index: 9;
     mix-blend-mode: overlay;
     will-change: background;
 }
 
-/* Vertical Gold Ribbon Wrap (Matte Gold Matching Wax Seal) */
+/* Photorealistic Gold Satin Ribbon Wrap (100% Exact Match from como deve estar.png) */
 .gold-ribbon-band.vertical {
     position: absolute;
     top: 0;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 52px;
-    height: 100%;
-    background: linear-gradient(90deg, #8c6725 0%, #ba903d 15%, #e6c268 35%, #f2d37c 50%, #e1b854 68%, #b08530 85%, #735017 100%);
+    background: url('assets/img/gold_satin_ribbon.png?v=20260725_400') center center / 100% auto repeat-y;
     box-shadow: 
-        0 0 10px rgba(0,0,0,0.35),
-        inset 1px 0 2px rgba(255, 255, 255, 0.4),
-        inset -1px 0 2px rgba(0, 0, 0, 0.3);
+        0 6px 18px rgba(0, 0, 0, 0.45),
+        0 2px 6px rgba(0, 0, 0, 0.3);
     z-index: 8;
     pointer-events: none;
     transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+    overflow: visible;
 }
 
-.gold-ribbon-band.vertical .ribbon-gold-line {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.45);
+.gold-ribbon-band.vertical::before,
+.gold-ribbon-band.vertical::after {
+    display: none;
 }
-
-.gold-ribbon-band.vertical .ribbon-gold-line.left { left: 5px; }
-.gold-ribbon-band.vertical .ribbon-gold-line.right { right: 5px; }
 
 /* Ribbon Dropping Animation */
 .gold-ribbon-band.ribbon-dropped {
@@ -639,8 +628,12 @@ body.state-scene6 .experience-container {
 .envelope-back {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, #153725, #0b1f14);
-    border-radius: 4px;
+    background: #0b1f14 url('assets/img/envelope_paper_texture.jpg?v=20260725_20') center center / cover no-repeat;
+    border-radius: 3px;
+    box-shadow: 
+        0 45px 100px rgba(0, 0, 0, 0.8),
+        0 18px 40px rgba(0, 0, 0, 0.55),
+        0 4px 12px rgba(0, 0, 0, 0.4);
     overflow: hidden;
     z-index: 1;
 }
@@ -670,7 +663,7 @@ body.state-scene6 .experience-container {
     width: 200px;
     height: 265px;
     z-index: 4;
-    filter: drop-shadow(2px 0 4px rgba(0,0,0,0.3));
+    filter: drop-shadow(4px 2px 8px rgba(0,0,0,0.55));
 }
 
 .flap-right {
@@ -679,7 +672,7 @@ body.state-scene6 .experience-container {
     width: 200px;
     height: 265px;
     z-index: 4;
-    filter: drop-shadow(-2px 0 4px rgba(0,0,0,0.3));
+    filter: drop-shadow(-4px 2px 8px rgba(0,0,0,0.55));
 }
 
 .flap-bottom {
@@ -688,6 +681,7 @@ body.state-scene6 .experience-container {
     width: 400px;
     height: 145px;
     z-index: 5;
+    filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.45));
 }
 
 .flap-top {
@@ -702,6 +696,16 @@ body.state-scene6 .experience-container {
 
 .top-svg {
     overflow: visible;
+}
+
+.envelope.opened {
+    background-image: none;
+}
+
+.envelope.opened .envelope-flap,
+.envelope.opened .gold-ribbon-band,
+.envelope.opened .real-photo-seal-img {
+    opacity: 1;
 }
 
 .envelope.opened .flap-top {
@@ -732,8 +736,8 @@ body.state-scene6 .envelope {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 114px;
-    height: 114px;
+    width: 118px;
+    height: 118px;
     z-index: 20;
     cursor: pointer;
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
@@ -744,8 +748,8 @@ body.state-scene6 .envelope {
     height: 100%;
     object-fit: contain;
     filter: 
-        drop-shadow(0 14px 28px rgba(18, 10, 4, 0.6)) 
-        drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+        drop-shadow(0 18px 36px rgba(12, 6, 2, 0.75)) 
+        drop-shadow(0 5px 12px rgba(0, 0, 0, 0.5));
     pointer-events: none;
     transition: transform 0.3s ease;
 }

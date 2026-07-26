@@ -17,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <!-- App Styles -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260725_500">
 </head>
 <body class="state-scene1">
 
@@ -59,10 +59,15 @@
                         <div class="pocket-shadow"></div>
                     </div>
                     
-                    <!-- SVG Shared Texture Definitions (3D Suede Grain & Ribbon Satin) -->
+                    <!-- SVG Shared Texture Definitions (Handmade Forest Green Paper & Ribbon Satin) -->
                     <svg width="0" height="0" style="position:absolute; pointer-events:none;">
                         <defs>
-                            <!-- Real Velvet Suede (Camurça 3D) Fiber Pattern -->
+                            <!-- Handmade Forest Green Porous Paper Texture -->
+                            <pattern id="handmadePaperPattern" width="400" height="400" patternUnits="userSpaceOnUse">
+                                <image href="assets/img/envelope_paper_texture.jpg?v=20260725_20" width="400" height="400" preserveAspectRatio="none" />
+                            </pattern>
+
+                            <!-- Real Velvet Suede Fiber Pattern -->
                             <pattern id="suedeGrainPattern" width="4" height="4" patternUnits="userSpaceOnUse">
                                 <rect width="4" height="4" fill="rgba(0,0,0,0.08)" />
                                 <circle cx="1" cy="1" r="0.85" fill="rgba(255,255,255,0.11)" />
@@ -78,21 +83,20 @@
                         </defs>
                     </svg>
 
-                    <!-- Real Suede (Camurça 3D) Flap Panels with Volumetric Fold Shadows & Seams -->
+                    <!-- Real Handmade Forest Green Flap Panels with Soft Volumetric Fold Shadows -->
                     <!-- Left Flap Panel -->
                     <div class="envelope-flap flap-left">
                         <svg class="flap-svg" viewBox="0 0 200 265" preserveAspectRatio="none">
                             <defs>
-                                <linearGradient id="gradFlapLeft" x1="0%" y1="0%" x2="100%" y2="50%">
-                                    <stop offset="0%" stop-color="#22543d" />
-                                    <stop offset="65%" stop-color="#183e2b" />
-                                    <stop offset="100%" stop-color="#102c1e" />
+                                <linearGradient id="shadowFlapLeft" x1="0%" y1="0%" x2="100%" y2="50%">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+                                    <stop offset="80%" stop-color="#000000" stop-opacity="0.0" />
+                                    <stop offset="100%" stop-color="#000000" stop-opacity="0.3" />
                                 </linearGradient>
                             </defs>
-                            <polygon points="0,0 200,132.5 0,265" fill="url(#gradFlapLeft)" />
-                            <polygon points="0,0 200,132.5 0,265" fill="url(#suedeGrainPattern)" opacity="0.85" />
-                            <line x1="0" y1="0" x2="200" y2="132.5" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
-                            <line x1="200" y1="132.5" x2="0" y2="265" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" />
+                            <polygon points="0,0 200,132.5 0,265" fill="url(#handmadePaperPattern)" />
+                            <polygon points="0,0 200,132.5 0,265" fill="url(#shadowFlapLeft)" />
+                            <line x1="0" y1="0" x2="200" y2="132.5" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
                         </svg>
                     </div>
 
@@ -100,16 +104,15 @@
                     <div class="envelope-flap flap-right">
                         <svg class="flap-svg" viewBox="0 0 200 265" preserveAspectRatio="none">
                             <defs>
-                                <linearGradient id="gradFlapRight" x1="100%" y1="0%" x2="0%" y2="50%">
-                                    <stop offset="0%" stop-color="#22543d" />
-                                    <stop offset="65%" stop-color="#183e2b" />
-                                    <stop offset="100%" stop-color="#102c1e" />
+                                <linearGradient id="shadowFlapRight" x1="100%" y1="0%" x2="0%" y2="50%">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+                                    <stop offset="80%" stop-color="#000000" stop-opacity="0.0" />
+                                    <stop offset="100%" stop-color="#000000" stop-opacity="0.3" />
                                 </linearGradient>
                             </defs>
-                            <polygon points="200,0 0,132.5 200,265" fill="url(#gradFlapRight)" />
-                            <polygon points="200,0 0,132.5 200,265" fill="url(#suedeGrainPattern)" opacity="0.85" />
-                            <line x1="200" y1="0" x2="0" y2="132.5" stroke="rgba(255,255,255,0.18)" stroke-width="2" />
-                            <line x1="0" y1="132.5" x2="200" y2="265" stroke="rgba(0,0,0,0.5)" stroke-width="2.5" />
+                            <polygon points="200,0 0,132.5 200,265" fill="url(#handmadePaperPattern)" />
+                            <polygon points="200,0 0,132.5 200,265" fill="url(#shadowFlapRight)" />
+                            <line x1="200" y1="0" x2="0" y2="132.5" stroke="rgba(255,255,255,0.15)" stroke-width="1" />
                         </svg>
                     </div>
 
@@ -117,14 +120,13 @@
                     <div class="envelope-flap flap-bottom">
                         <svg class="flap-svg" viewBox="0 0 400 145" preserveAspectRatio="none">
                             <defs>
-                                <linearGradient id="gradFlapBottom" x1="50%" y1="100%" x2="50%" y2="0%">
-                                    <stop offset="0%" stop-color="#163f2b" />
-                                    <stop offset="100%" stop-color="#0d261a" />
+                                <linearGradient id="shadowFlapBottom" x1="50%" y1="100%" x2="50%" y2="0%">
+                                    <stop offset="0%" stop-color="#000000" stop-opacity="0.25" />
+                                    <stop offset="100%" stop-color="#000000" stop-opacity="0.0" />
                                 </linearGradient>
                             </defs>
-                            <polygon points="0,145 200,0 400,145" fill="url(#gradFlapBottom)" />
-                            <polygon points="0,145 200,0 400,145" fill="url(#suedeGrainPattern)" opacity="0.85" />
-                            <polyline points="0,145 200,0 400,145" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.2" />
+                            <polygon points="0,145 200,0 400,145" fill="url(#handmadePaperPattern)" />
+                            <polygon points="0,145 200,0 400,145" fill="url(#shadowFlapBottom)" />
                         </svg>
                     </div>
 
@@ -132,50 +134,32 @@
                     <div id="top-flap" class="envelope-flap flap-top">
                         <svg class="flap-svg top-svg" viewBox="0 0 400 152" preserveAspectRatio="none">
                             <defs>
-                                <linearGradient id="gradFlapTop" x1="50%" y1="0%" x2="50%" y2="100%">
-                                    <stop offset="0%" stop-color="#265a41" />
-                                    <stop offset="70%" stop-color="#1d4934" />
-                                    <stop offset="100%" stop-color="#143827" />
+                                <linearGradient id="shadowFlapTop" x1="50%" y1="0%" x2="50%" y2="100%">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15" />
+                                    <stop offset="70%" stop-color="#000000" stop-opacity="0.0" />
+                                    <stop offset="100%" stop-color="#000000" stop-opacity="0.3" />
                                 </linearGradient>
                                 <filter id="topFlapShadow" x="-20%" y="-20%" width="140%" height="160%">
-                                    <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000000" flood-opacity="0.75" />
-                                    <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#08180e" flood-opacity="0.5" />
+                                    <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.55" />
+                                    <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#08180e" flood-opacity="0.35" />
                                 </filter>
                             </defs>
-                            <polygon points="0,0 400,0 200,152" fill="url(#gradFlapTop)" filter="url(#topFlapShadow)" />
-                            <polygon points="0,0 400,0 200,152" fill="url(#suedeGrainPattern)" opacity="0.85" />
-                            <!-- Upper Fold Bevel Line -->
-                            <line x1="0" y1="1.5" x2="400" y2="1.5" stroke="rgba(255,255,255,0.28)" stroke-width="2" />
+                            <polygon points="0,0 400,0 200,152" fill="url(#handmadePaperPattern)" filter="url(#topFlapShadow)" />
+                            <polygon points="0,0 400,0 200,152" fill="url(#shadowFlapTop)" />
                             <!-- Cut suede edge highlights along V seam -->
-                            <polyline points="0,0 200,152 400,0" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.8" />
+                            <polyline points="0,0 200,152 400,0" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
                         </svg>
                     </div>
 
-                    <!-- Vertical Gold Ribbon Wrap (Matte Gold Matching Wax Seal with Directional Sheen) -->
+                    <!-- Vertical Gold Satin Ribbon Wrap (Extracted from macro photo) -->
                     <div id="gold-ribbon" class="gold-ribbon-band vertical">
-                        <svg class="ribbon-texture-svg" width="100%" height="100%" preserveAspectRatio="none">
-                            <defs>
-                                <linearGradient id="ribbonSatinGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#8c6725" />
-                                    <stop offset="15%" stop-color="#ba903d" />
-                                    <stop offset="35%" stop-color="#e6c268" />
-                                    <stop offset="50%" stop-color="#f2d37c" />
-                                    <stop offset="68%" stop-color="#e1b854" />
-                                    <stop offset="85%" stop-color="#b08530" />
-                                    <stop offset="100%" stop-color="#735017" />
-                                </linearGradient>
-                            </defs>
-                            <rect width="100%" height="100%" fill="url(#ribbonSatinGrad)" />
-                            <rect width="100%" height="100%" fill="url(#satinSilkWeave)" opacity="0.4" />
-                        </svg>
                         <div class="ribbon-gold-line left"></div>
                         <div class="ribbon-gold-line right"></div>
                     </div>
 
                     <!-- Photorealistic 3D Gold Wax Seal (Unified, Unbroken & Matched to Ribbon) -->
                     <div id="wax-seal" class="wax-seal" title="Toque para abrir o convite">
-                        <div class="seal-glow"></div>
-                        <img src="assets/img/seal_gold_ribbon_match.png" class="real-photo-seal-img" alt="Selo de Cera Dourado Monograma AR">
+                        <img src="assets/img/seal_gold_ribbon_match.png?v=20260725_500" class="real-photo-seal-img" alt="Selo de Cera Dourado Monograma AR">
                     </div>
                 </div>
 
