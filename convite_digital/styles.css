@@ -380,13 +380,30 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #f7eee6;
-    background: 
-        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
-        url('assets/img/beige_bokeh_bg.jpg?v=20260725_30') center center / cover no-repeat fixed;
     font-family: var(--font-body);
     color: var(--color-ink);
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   1.1 HARDWARE-ACCELERATED HIGH-DEFINITION BACKGROUND LAYER
+   -------------------------------------------------------------------------- */
+.fixed-bg-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.15) 100%),
+        url('assets/img/fundo_seda_rosas_hd.jpg?v=20260727_400') center center / cover no-repeat;
+    transform: translateZ(0);
+    will-change: transform;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Lock Page Scroll Until Envelope Wax Seal is Opened */
@@ -560,14 +577,23 @@ body.state-scene6 .experience-container {
     width: 410px;
     height: 272px;
     max-width: 92vw;
-    background: #173d2a url('assets/img/envelope_paper_texture.jpg?v=20260725_200') center center / cover repeat;
+    background: transparent;
     border-radius: 4px;
-    box-shadow: 
-        0 40px 90px rgba(0, 0, 0, 0.7),
-        0 15px 35px rgba(0, 0, 0, 0.45);
     transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease;
     z-index: 10;
     overflow: visible;
+}
+
+/* 100% Photorealistic Studio Photo Asset of Real Laser-Cut Envelope */
+.real-laser-cut-envelope-img {
+    position: absolute;
+    inset: -2px;
+    width: 101%;
+    height: 101%;
+    object-fit: fill;
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.65)) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
+    pointer-events: none;
+    z-index: 10;
 }
 
 /* Clean Studio Light Sheen Overlay for Pure Natural Handmade Paper Photo */
@@ -576,22 +602,20 @@ body.state-scene6 .experience-container {
     inset: 0;
     border-radius: 4px;
     background: 
-        radial-gradient(ellipse at 28% 20%, rgba(255, 255, 255, 0.18) 0%, transparent 62%),
-        radial-gradient(ellipse at 75% 82%, rgba(0, 0, 0, 0.3) 0%, transparent 68%);
+        radial-gradient(ellipse at 28% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
     pointer-events: none;
-    z-index: 2;
+    z-index: 11;
 }
 
 /* Unified Directional Fixed Studio Spotlight Reflection driven by Gyroscope/Mouse */
 .scene-spotlight-reflection {
     position: absolute;
-    inset: -2px;
+    inset: 0;
     border-radius: 4px;
     background: 
-        radial-gradient(ellipse at var(--spotlight-x, 24%) var(--spotlight-y, 18%), rgba(255, 252, 235, 0.5) 0%, rgba(255, 240, 200, 0.2) 38%, transparent 68%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 48%);
+        radial-gradient(ellipse at var(--spotlight-x, 24%) var(--spotlight-y, 18%), rgba(255, 255, 255, 0.15) 0%, transparent 60%);
     pointer-events: none;
-    z-index: 9;
+    z-index: 12;
     mix-blend-mode: overlay;
     will-change: background;
 }
@@ -608,7 +632,7 @@ body.state-scene6 .experience-container {
     box-shadow: 
         0 6px 18px rgba(0, 0, 0, 0.45),
         0 2px 6px rgba(0, 0, 0, 0.3);
-    z-index: 8;
+    z-index: 14;
     pointer-events: none;
     transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
     overflow: visible;
@@ -657,31 +681,10 @@ body.state-scene6 .experience-container {
     display: block;
 }
 
-.flap-left {
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 265px;
-    z-index: 4;
-    filter: drop-shadow(4px 2px 8px rgba(0,0,0,0.55));
-}
-
-.flap-right {
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 265px;
-    z-index: 4;
-    filter: drop-shadow(-4px 2px 8px rgba(0,0,0,0.55));
-}
-
+.flap-left,
+.flap-right,
 .flap-bottom {
-    bottom: 0;
-    left: 0;
-    width: 400px;
-    height: 145px;
-    z-index: 5;
-    filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.45));
+    display: none !important;
 }
 
 .flap-top {
@@ -698,6 +701,10 @@ body.state-scene6 .experience-container {
     overflow: visible;
 }
 
+.envelope-back {
+    display: none;
+}
+
 .envelope.opened {
     background-image: none;
 }
@@ -711,6 +718,7 @@ body.state-scene6 .experience-container {
 .envelope.opened .flap-top {
     transform: rotateX(180deg);
     z-index: 1;
+    opacity: 1;
 }
 
 /* Keep envelope static and prominent during opening sequence */
@@ -833,6 +841,26 @@ body.state-scene6 .envelope {
     flex-direction: column;
     justify-content: space-between;
 }
+
+/* 3D Laser-Cut Floral Arabesque Corners Styling */
+.laser-cut-card-corners {
+    position: absolute;
+    inset: -2px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.laser-corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.35));
+}
+
+.laser-corner.corner-tl { top: -4px; left: -4px; }
+.laser-corner.corner-tr { top: -4px; right: -4px; }
+.laser-corner.corner-bl { bottom: -4px; left: -4px; }
+.laser-corner.corner-br { bottom: -4px; right: -4px; }
 
 .letter-header {
     text-align: center;

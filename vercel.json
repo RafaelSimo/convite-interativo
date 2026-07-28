@@ -1,0 +1,6 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/convite_digital/$1" }
+  ]
+}

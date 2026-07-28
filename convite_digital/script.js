@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof QRCode !== 'undefined' && pdfQrContainer) {
         pdfQrContainer.innerHTML = "";
         new QRCode(pdfQrContainer, {
-            text: window.location.href || "https://alleaneerafael.com.br",
+            text: window.location.href || "https://convite-interativo-beige.vercel.app/",
             width: 90,
             height: 90,
             colorDark : "#0a3326",

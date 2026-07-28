@@ -17,9 +17,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <!-- App Styles -->
-    <link rel="stylesheet" href="styles.css?v=20260725_500">
+    <link rel="stylesheet" href="styles.css?v=20260727_300000">
 </head>
 <body class="state-scene1">
+
+    <!-- Hardware-Accelerated High-Definition Background Layer -->
+    <div id="fixed-bg-layer" class="fixed-bg-layer"></div>
 
     <!-- Ambient Audio Controls -->
     <audio id="bg-music" loop preload="auto">
@@ -48,6 +51,9 @@
                 
                 <!-- 1. Photorealistic Forest Emerald Green Suede (Camurça 3D) Envelope with Studio Lighting & Gold Ribbon -->
                 <div id="envelope" class="envelope realistic-envelope 3d-suede-envelope">
+                    <!-- 100% Photorealistic Studio Photo Asset of Real Laser-Cut Envelope -->
+                    <img src="assets/img/envelope_realista_vazado.png?v=20260727_100000" class="real-laser-cut-envelope-img" alt="Envelope Realista Recortado a Laser">
+                    
                     <!-- Real Suede Velvet Fabric Texture & Sheen Overlay -->
                     <div class="envelope-suede-texture-overlay"></div>
 
@@ -130,7 +136,7 @@
                         </svg>
                     </div>
 
-                    <!-- Top Flap Panel (V-Flap with heavy volumetric 3D drop shadow) -->
+                    <!-- Top Flap Panel (V-Flap with heavy volumetric 3D drop shadow & Laser-Cut Floral Arabesques) -->
                     <div id="top-flap" class="envelope-flap flap-top">
                         <svg class="flap-svg top-svg" viewBox="0 0 400 152" preserveAspectRatio="none">
                             <defs>
@@ -143,11 +149,24 @@
                                     <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.55" />
                                     <feDropShadow dx="0" dy="2" stdDeviation="1.5" flood-color="#08180e" flood-opacity="0.35" />
                                 </filter>
+                                <filter id="laserCut3DDepth" x="-20%" y="-20%" width="140%" height="140%">
+                                    <feDropShadow dx="1.2" dy="1.8" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.6" />
+                                    <feDropShadow dx="-0.5" dy="-0.5" stdDeviation="0.8" flood-color="#ffffff" flood-opacity="0.2" />
+                                </filter>
                             </defs>
                             <polygon points="0,0 400,0 200,152" fill="url(#handmadePaperPattern)" filter="url(#topFlapShadow)" />
                             <polygon points="0,0 400,0 200,152" fill="url(#shadowFlapTop)" />
+                            
+                            <!-- 3D Realistic Laser-Cut Floral Arabesque Edge (Vazado Floral Elegante) -->
+                            <g class="laser-cut-v-arabesque" filter="url(#laserCut3DDepth)">
+                                <path d="M0,0 Q50,28 100,48 C130,60 160,78 200,152 C240,78 270,60 300,48 Q350,28 400,0 L382,0 Q342,23 296,42 C266,55 236,73 200,140 C164,73 134,55 104,42 Q58,23 18,0 Z" fill="#d4af37" opacity="0.9" />
+                                <!-- Laser-Cut Swirling Floral Vine Cutouts (Vazados a Laser) -->
+                                <path d="M55,16 C68,8 82,24 74,34 C66,42 50,28 55,16 Z M115,44 C128,34 144,52 134,64 C124,74 105,56 115,44 Z M165,90 C176,78 192,100 182,112 C172,122 154,104 165,90 Z" fill="#0c2317" opacity="0.85" />
+                                <path d="M345,16 C332,8 318,24 326,34 C334,42 350,28 345,16 Z M285,44 C272,34 256,52 266,64 C276,74 295,56 285,44 Z M235,90 C224,78 208,100 218,112 C228,122 246,104 235,90 Z" fill="#0c2317" opacity="0.85" />
+                            </g>
+
                             <!-- Cut suede edge highlights along V seam -->
-                            <polyline points="0,0 200,152 400,0" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" />
+                            <polyline points="0,0 200,152 400,0" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" />
                         </svg>
                     </div>
 
@@ -313,7 +332,7 @@
                 <div class="gift-site-card larger-text-card">
                     <h3>Site Oficial dos Noivos</h3>
                     <p>Para mais informações sobre localização, trajes, horários e etc, acessar o site dos noivos:</p>
-                    <a href="https://alleaneerafael.com.br" target="_blank" rel="noopener noreferrer" id="btn-open-wedding-site" class="gift-site-btn">
+                    <a href="https://convite-interativo-beige.vercel.app/" target="_blank" rel="noopener noreferrer" id="btn-open-wedding-site" class="gift-site-btn">
                         <span class="btn-icon">🌐</span>
                         <span>Acessar Site dos Noivos</span>
                     </a>
