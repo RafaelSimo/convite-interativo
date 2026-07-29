@@ -304,30 +304,44 @@ document.addEventListener('DOMContentLoaded', () => {
     updateEnvelope3DMotion();
 
     /* --------------------------------------------------------------------------
-       3. BACKGROUND MUSIC & AUDIO ENGINE (SOFT AMBIENT VOLUME)
+       3. BACKGROUND MUSIC & AUDIO ENGINE (SOFT AMBIENT VOLUME & LIFECYCLE)
        -------------------------------------------------------------------------- */
     const bgMusic = document.getElementById('bg-music');
+    let wasPlayingBeforeHidden = false;
+    let userRedirectedOut = false;
 
     if (bgMusic) {
         bgMusic.volume = 0.35; // Soft ambient volume level (35%)
     }
 
+    function playMusic() {
+        if (!bgMusic) return;
+        bgMusic.volume = 0.35;
+        bgMusic.play().then(() => {
+            isAudioPlaying = true;
+            if (soundOnIcon) soundOnIcon.classList.remove('hidden');
+            if (soundOffIcon) soundOffIcon.classList.add('hidden');
+        }).catch(err => {
+            console.log("Audio play error:", err);
+        });
+    }
+
+    function pauseMusic() {
+        if (!bgMusic) return;
+        bgMusic.pause();
+        isAudioPlaying = false;
+        if (soundOnIcon) soundOnIcon.classList.add('hidden');
+        if (soundOffIcon) soundOffIcon.classList.remove('hidden');
+    }
+
     function toggleBackgroundMusic() {
         if (!bgMusic) return;
         if (isAudioPlaying) {
-            bgMusic.pause();
-            isAudioPlaying = false;
-            soundOnIcon.classList.add('hidden');
-            soundOffIcon.classList.remove('hidden');
+            userRedirectedOut = false;
+            pauseMusic();
         } else {
-            bgMusic.volume = 0.35;
-            bgMusic.play().then(() => {
-                isAudioPlaying = true;
-                soundOnIcon.classList.remove('hidden');
-                soundOffIcon.classList.add('hidden');
-            }).catch(err => {
-                console.log("Audio play error:", err);
-            });
+            userRedirectedOut = false;
+            playMusic();
         }
     }
 
@@ -337,19 +351,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Auto-start ambient music on first user touch/click anywhere
     const startAudioOnUserGesture = () => {
-        if (bgMusic && !isAudioPlaying) {
-            bgMusic.volume = 0.35;
-            bgMusic.play().then(() => {
-                isAudioPlaying = true;
-                if (soundOnIcon) soundOnIcon.classList.remove('hidden');
-                if (soundOffIcon) soundOffIcon.classList.add('hidden');
-            }).catch(() => {});
+        if (bgMusic && !isAudioPlaying && !userRedirectedOut) {
+            playMusic();
         }
         document.removeEventListener('click', startAudioOnUserGesture);
         document.removeEventListener('touchstart', startAudioOnUserGesture);
     };
     document.addEventListener('click', startAudioOnUserGesture, { once: true });
     document.addEventListener('touchstart', startAudioOnUserGesture, { once: true });
+
+    /* --- Lifecycle Events: Stop Audio when user leaves screen/tab/app or closes browser --- */
+    
+    // 1. Tab visibility changes (tab switch, minimizing browser, screen lock, background app on mobile)
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            if (isAudioPlaying) {
+                wasPlayingBeforeHidden = true;
+                pauseMusic();
+            }
+        } else {
+            // Auto-resume ONLY if audio was active before AND user didn't leave via site redirect link
+            if (wasPlayingBeforeHidden && !userRedirectedOut) {
+                playMusic();
+            }
+            wasPlayingBeforeHidden = false;
+        }
+    });
+
+    // 2. Page unload / navigate away / mobile app close events
+    window.addEventListener('pagehide', () => {
+        pauseMusic();
+    });
+
+    window.addEventListener('beforeunload', () => {
+        pauseMusic();
+    });
+
+    if ('freeze' in document) {
+        document.addEventListener('freeze', () => {
+            pauseMusic();
+        });
+    }
+
+    // 3. Immediately stop music when user clicks/taps ANY link redirecting to the external site
+    const stopAudioOnRedirect = () => {
+        userRedirectedOut = true;
+        wasPlayingBeforeHidden = false;
+        pauseMusic();
+    };
+
+    // Attach listener to all links opening external site or target="_blank"
+    document.querySelectorAll('a[href], .gift-site-btn').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && (href.startsWith('http') || href.startsWith('//') || link.getAttribute('target') === '_blank')) {
+            link.addEventListener('click', stopAudioOnRedirect);
+            link.addEventListener('touchend', stopAudioOnRedirect, { passive: true });
+        }
+    });
 
     /* --------------------------------------------------------------------------
        4. SCENE SEQUENCER (CENAS 1 A 6)
@@ -373,14 +431,8 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.remove('lock-scroll');
 
         // Play background music on seal tap
-        if (bgMusic && !isAudioPlaying) {
-            bgMusic.play().then(() => {
-                isAudioPlaying = true;
-                if (soundOnIcon) soundOnIcon.classList.remove('hidden');
-                if (soundOffIcon) soundOffIcon.classList.add('hidden');
-            }).catch(err => {
-                console.log("Music play catch:", err);
-            });
+        if (bgMusic && !isAudioPlaying && !userRedirectedOut) {
+            playMusic();
         }
 
         // 1. Wax Shatter & Ribbon Drop
