@@ -18,8 +18,8 @@ window.downloadCalendar = function(e) {
 "DTSTART:20261121T170000\r\n" +
 "DTEND:20261121T230000\r\n" +
 "SUMMARY:Casamento Alleane & Rafael\r\n" +
-"DESCRIPTION:Celebração do Casamento de Alleane e Rafael na Igreja N.S. de Fátima às 17:00h.\r\n" +
-"LOCATION:Igreja N.S. de Fátima\r\n" +
+"DESCRIPTION:Celebração do Casamento de Alleane e Rafael. Cerimônia às 17:00h na Igreja N.S. de Fátima e Recepção às 19:00h no Villa Condotti.\r\n" +
+"LOCATION:Igreja N.S. de Fátima / Villa Condotti\r\n" +
 "STATUS:CONFIRMED\r\n" +
 "BEGIN:VALARM\r\n" +
 "TRIGGER:-P1D\r\n" +
@@ -462,13 +462,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentScene = 4;
                 body.className = 'state-scene4';
 
-                // Start Slow Feather Handwriting
-                goldenFeather.classList.remove('hidden');
-                signatureText.classList.add('writing');
+                // Start Feather Handwriting if elements are present
+                if (goldenFeather) goldenFeather.classList.remove('hidden');
+                if (signatureText) signatureText.classList.add('writing');
 
-                // 4. STEP C: Menus Reveal ONLY AFTER Signature Completes
+                // 4. STEP C: Menus Reveal
                 setTimeout(() => {
-                    goldenFeather.classList.add('stroke-end');
+                    if (goldenFeather) goldenFeather.classList.add('stroke-end');
 
                     // Reveal Menu Papiros below the signed letter
                     currentScene = 5;
@@ -486,10 +486,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         currentScene = 6;
                         body.className = 'state-scene6';
-                        actionToolbar.classList.remove('hidden-toolbar');
-                    }, 1200);
+                        if (actionToolbar) actionToolbar.classList.remove('hidden-toolbar');
+                    }, 600);
 
-                }, 3600); // 3.6s writing duration for elegant signature
+                }, 400);
 
             }, 1400); // Waits for letter slide to reach top
 
@@ -562,8 +562,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const gCalUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE"
             + "&text=" + encodeURIComponent("Casamento Alleane & Rafael")
             + "&dates=20261121T170000Z/20261121T230000Z"
-            + "&details=" + encodeURIComponent("Celebração do Casamento de Alleane e Rafael na Igreja N.S. de Fátima.")
-            + "&location=" + encodeURIComponent("Igreja N.S. de Fátima");
+            + "&details=" + encodeURIComponent("Celebração do Casamento de Alleane e Rafael. Cerimônia às 17h na Igreja N.S. de Fátima e Recepção às 19h no Villa Condotti.")
+            + "&location=" + encodeURIComponent("Igreja N.S. de Fátima / Villa Condotti");
             
         try {
             window.open(gCalUrl, '_blank');
@@ -580,8 +580,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "DTSTART:20261121T170000Z",
             "DTEND:20261121T230000Z",
             "SUMMARY:Casamento Alleane & Rafael",
-            "DESCRIPTION:Celebração do Casamento de Alleane e Rafael na Igreja N.S. de Fátima.",
-            "LOCATION:Igreja N.S. de Fátima",
+            "DESCRIPTION:Celebração do Casamento de Alleane e Rafael. Cerimônia às 17h na Igreja N.S. de Fátima e Recepção às 19h no Villa Condotti.",
+            "LOCATION:Igreja N.S. de Fátima / Villa Condotti",
             "STATUS:CONFIRMED",
             "END:VEVENT",
             "END:VCALENDAR"

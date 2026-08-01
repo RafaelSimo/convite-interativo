@@ -950,6 +950,12 @@ body.state-scene6 .envelope {
     margin-top: 4px;
 }
 
+.detail-item.full-width.no-border {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+}
+
 .detail-label {
     font-family: var(--font-sans);
     font-size: 9px;
